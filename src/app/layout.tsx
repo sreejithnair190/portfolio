@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/providers/theme-provider";
-import { AnimationProvider } from "@/components/animation-provider";
+import { AnimationProvider } from "@/providers/animation-provider";
 import ScrollTracker from "@/components/scroll-tracker";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
@@ -31,14 +31,12 @@ export default function RootLayout({
         >
           <AnimationProvider>
             <SmoothScrollProvider>
-              <div className="flex min-h-screen flex-col">
-                <Navbar />
-                <ScrollTracker />
-                <main className="flex-1 container mx-auto px-4 overflow-x-hidden">
-                  {children}
-                </main>
-                <Footer />
-              </div>
+              <Navbar />
+              <ScrollTracker />
+              <main className="flex-1 container mx-auto px-4 overflow-x-hidden">
+                {children}
+              </main>
+              <Footer />
             </SmoothScrollProvider>
           </AnimationProvider>
         </ThemeProvider>
