@@ -13,53 +13,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { Calendar, Briefcase } from "lucide-react";
 import { useRef } from "react";
 import { cn } from "@/lib/utils";
-
-type Experience = {
-  title: string;
-  company: string;
-  period: string;
-  description: string[];
-  technologies: string[];
-};
-
-const experiences: Experience[] = [
-  {
-    title: "Senior Software Engineer",
-    company: "XYZ Corp",
-    period: "Sept, 2020 - Present",
-    description: [
-      "Led a team of 5 developers in building a microservices architecture",
-      "Reduced page load times by 40% through performance optimizations",
-      "Implemented CI/CD pipelines that decreased deployment time by 60%",
-      "Mentored junior developers and conducted code reviews",
-    ],
-    technologies: ["React", "Node.js", "AWS", "Docker", "TypeScript"],
-  },
-  {
-    title: "Full-Stack Developer",
-    company: "ABC Startup",
-    period: "Mar, 2018 - Aug, 2020",
-    description: [
-      "Developed and maintained multiple client-facing web applications",
-      "Built RESTful APIs and integrated third-party services",
-      "Collaborated with UX designers to implement responsive designs",
-      "Participated in agile development processes and sprint planning",
-    ],
-    technologies: ["JavaScript", "React", "Express", "MongoDB", "Redis"],
-  },
-  {
-    title: "Front-End Developer",
-    company: "Web Solutions Inc",
-    period: "May, 2016 - Feb, 2018",
-    description: [
-      "Created responsive and accessible user interfaces",
-      "Converted design mockups into functional web pages",
-      "Optimized website performance and SEO",
-      "Worked with cross-functional teams to deliver projects on schedule",
-    ],
-    technologies: ["HTML5", "CSS3", "JavaScript", "jQuery", "Bootstrap"],
-  },
-];
+import { EXPERIENCE } from "@/utils/experience";
 
 const gridPatternStyle = `
     .bg-grid-pattern {
@@ -203,7 +157,7 @@ export default function Experience() {
           </svg>
 
           <div className="space-y-12">
-            {experiences.map((exp, index) => (
+            {EXPERIENCE.map((exp, index) => (
               <motion.div
                 key={index}
                 className="relative md:w-1/2 md:odd:pr-12 md:even:pl-12 md:even:ml-auto"

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import ScrollReveal from "@/components/scroll-reveal"
+import ScrollReveal from "@/components/scroll-reveal";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -13,16 +13,13 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import {
-  Github,
-  Linkedin,
-  Mail,
-  MapPin,
   Send,
   CheckCircle,
   MoveRight,
 } from "lucide-react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
+import { CONTACT } from "@/utils/contact";
 
 const gridPatternStyle = `
   .bg-grid-pattern {
@@ -88,25 +85,6 @@ export default function Contact() {
           </motion.p>
         </ScrollReveal>
 
-        {/* <div className="text-center mb-16">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-3xl font-bold tracking-tighter md:text-5xl mb-4 bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 bg-clip-text text-transparent"
-          >
-            Get In Touch
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.6 }}
-            className="text-muted-foreground text-lg max-w-2xl mx-auto"
-          >
-            Have a project in mind or want to discuss opportunities? I&apos;d love to hear from you.
-          </motion.p>
-        </div> */}
-
         <div className="grid gap-8 md:grid-cols-2 max-w-6xl mx-auto">
           {/* Contact Information */}
           <motion.div
@@ -124,31 +102,7 @@ export default function Contact() {
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
-                {[
-                  {
-                    icon: Mail,
-                    title: "Email",
-                    content: "sreejith190nair@gmail.com",
-                    href: "mailto:sreejith190nair@gmail.com",
-                  },
-                  {
-                    icon: Linkedin,
-                    title: "LinkedIn",
-                    content: "linkedin.com/in/johndoe",
-                    href: "https://linkedin.com/in/johndoe",
-                  },
-                  {
-                    icon: Github,
-                    title: "GitHub",
-                    content: "github.com/johndoe",
-                    href: "https://github.com/johndoe",
-                  },
-                  {
-                    icon: MapPin,
-                    title: "Location",
-                    content: "San Francisco, CA",
-                  },
-                ].map((item, index) => (
+                {CONTACT.map((item, index) => (
                   <motion.div
                     key={index}
                     className="flex items-center gap-4 p-4 rounded-lg bg-background/5 hover:bg-background/10 transition-colors group"

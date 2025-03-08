@@ -13,73 +13,8 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import ScrollReveal from "@/components/scroll-reveal";
 import Link from "next/link";
-
-type Education = {
-  degree: string;
-  institution: string;
-  period: string;
-  description?: string;
-};
-
-type Certification = {
-  name: string;
-  issuer: string;
-  date: string;
-  url?: string;
-};
-
-const educations: Education[] = [
-  {
-    degree: "B.S. in Computer Science",
-    institution: "University of Example",
-    period: "2016 - 2020",
-    description:
-      "Graduated with honors. Specialized in software engineering and web development.",
-  },
-  {
-    degree: "Associate's Degree in Web Development",
-    institution: "Community College of Technology",
-    period: "2014 - 2016",
-    description:
-      "Foundation courses in programming, web design, and database management.",
-  },
-];
-
-const certifications: Certification[] = [
-  {
-    name: "AWS Certified Developer",
-    issuer: "Amazon Web Services",
-    date: "2022",
-    url: "https://example.com/cert1",
-  },
-  {
-    name: "Professional Scrum Master I",
-    issuer: "Scrum.org",
-    date: "2021",
-    url: "https://example.com/cert2",
-  },
-  {
-    name: "React Advanced Concepts",
-    issuer: "Frontend Masters",
-    date: "2020",
-    url: "https://example.com/cert3",
-  },
-  {
-    name: "MongoDB Database Administrator",
-    issuer: "MongoDB University",
-    date: "2019",
-    url: "https://example.com/cert4",
-  },
-];
-
-const gridPatternStyle = `
-  .bg-grid-pattern {
-    background-size: 40px 40px;
-    background-image: 
-      linear-gradient(to right, rgba(0, 0, 0, 0.05) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
-  }
-`;
+import { ACADEMICS, CERTIFICATIONS } from "@/utils/education";
+import { gridPatternStyle } from "@/utils/constants";
 
 export default function Education() {
   return (
@@ -138,7 +73,7 @@ export default function Education() {
               </motion.h3>
             </div>
 
-            {educations.map((edu, index) => (
+            {ACADEMICS.map((edu, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 30 }}
@@ -242,7 +177,7 @@ export default function Education() {
             </div>
 
             <div className="grid gap-6 sm:grid-cols-2">
-              {certifications.map((cert, index) => (
+              {CERTIFICATIONS.map((cert, index) => (
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, scale: 0.9 }}

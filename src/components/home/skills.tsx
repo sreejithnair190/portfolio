@@ -4,50 +4,8 @@ import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import ScrollReveal from "@/components/scroll-reveal"
 import { motion } from "framer-motion"
-import { Code, Server, Database, Terminal } from "lucide-react"
-
-type SkillCategory = {
-  name: string
-  skills: string[]
-  icon: React.ReactNode
-  bgGradient: string
-}
-
-const skillCategories: SkillCategory[] = [
-  {
-    name: "Front-end",
-    skills: ["React", "Next.js", "TypeScript", "JavaScript", "HTML5", "CSS3", "Tailwind CSS", "Redux"],
-    icon: <Code className="h-6 w-6 text-cyan-500" />,
-    bgGradient: "from-cyan-500/5 via-cyan-400/5 to-transparent",
-  },
-  {
-    name: "Back-end",
-    skills: ["Node.js", "Express", "NestJS", "REST APIs", "GraphQL", "WebSockets"],
-    icon: <Server className="h-6 w-6 text-cyan-500" />,
-    bgGradient: "from-cyan-500/5 via-cyan-400/5 to-transparent",
-  },
-  {
-    name: "Databases",
-    skills: ["PostgreSQL", "MongoDB", "MySQL", "Redis", "Prisma", "Mongoose"],
-    icon: <Database className="h-6 w-6 text-cyan-500" />,
-    bgGradient: "from-cyan-500/5 via-cyan-400/5 to-transparent",
-  },
-  {
-    name: "DevOps & Tools",
-    skills: ["Git", "GitHub", "Docker", "CI/CD", "AWS", "Vercel", "Jest", "Cypress"],
-    icon: <Terminal className="h-6 w-6 text-cyan-500" />,
-    bgGradient: "from-cyan-500/5 via-cyan-400/5 to-transparent",
-  },
-]
-
-const gridPatternStyle = `
-  .bg-grid-pattern {
-    background-size: 40px 40px;
-    background-image: 
-      linear-gradient(to right, rgba(0, 0, 0, 0.05) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
-  }
-`
+import { gridPatternStyle } from "@/utils/constants"
+import { SKILLS } from "@/utils/skills"
 
 export default function Skills() {
   return (
@@ -79,9 +37,9 @@ export default function Skills() {
         </ScrollReveal>
 
         {/* Skill Categories */}
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-          {skillCategories.map((category, index) => (
-            <ScrollReveal key={category.name} delay={index * 0.1} direction="up" className="h-full">
+        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          {SKILLS.map((skill, index) => (
+            <ScrollReveal key={skill.name} delay={index * 0.1} direction="up" className="h-full">
               <motion.div 
                 whileHover={{ 
                   y: -8, 
@@ -98,18 +56,18 @@ export default function Skills() {
                         className="bg-cyan-100/20 p-3 rounded-xl"
                         whileHover={{ rotate: 10 }}
                       >
-                        {category.icon}
+                        <skill.icon className="h-6 w-6 text-cyan-500" />
                       </motion.div>
                       
                       <CardTitle className="font-bold text-xl bg-gradient-to-r from-cyan-400 to-cyan-600 bg-clip-text text-transparent">
-                        {category.name}
+                        {skill.name}
                       </CardTitle>
                     </div>
                   </CardHeader>
                   
                   <CardContent>
                     <div className="flex flex-wrap gap-2 pt-2">
-                      {category.skills.map((skill, skillIndex) => (
+                      {skill.skills.map((skill, skillIndex) => (
                         <motion.div
                           key={skill}
                           initial={{ opacity: 0, scale: 0.8 }}

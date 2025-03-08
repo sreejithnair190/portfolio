@@ -5,6 +5,7 @@ import { Github, Linkedin, Mail, ArrowUp } from "lucide-react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { email, github_url, linkedIn_url } from "@/utils/constants";
 
 export default function Footer() {
   const scrollToTop = () => {
@@ -67,7 +68,7 @@ export default function Footer() {
                     sreejith190nair@gmail.com
                   </Link>
                 </li>
-                <li className="text-muted-foreground">Toronto, Canada</li>
+                <li className="text-muted-foreground">Mumbai, India</li>
               </ul>
             </motion.div>
             
@@ -128,7 +129,7 @@ export default function Footer() {
                   className="bg-cyan-100/10 p-3 rounded-xl border border-cyan-100/20 hover:border-cyan-300/30"
                 >
                   <Link
-                    href="mailto:sreejith190nair@gmail.com"
+                    href={`mailto:${email}`}
                     className="text-cyan-500"
                     aria-label="Email"
                   >
@@ -142,7 +143,7 @@ export default function Footer() {
                   className="bg-cyan-100/10 p-3 rounded-xl border border-cyan-100/20 hover:border-cyan-300/30"
                 >
                   <Link
-                    href="https://github.com/johndoe"
+                    href={github_url}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-cyan-500"
@@ -158,7 +159,7 @@ export default function Footer() {
                   className="bg-cyan-100/10 p-3 rounded-xl border border-cyan-100/20 hover:border-cyan-300/30"
                 >
                   <Link
-                    href="https://linkedin.com/in/johndoe"
+                    href={linkedIn_url}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-cyan-500"

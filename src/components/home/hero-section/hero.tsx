@@ -1,9 +1,20 @@
-"use client"
+"use client";
 
-import { Button } from "@/components/ui/button"
-import Link from "next/link"
-import { ArrowRight, Download, Code, Server, Globe, Terminal, Database, Cpu, GitBranch, Brackets } from "lucide-react"
-import { motion } from "framer-motion"
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import {
+  ArrowRight,
+  Download,
+  Code,
+  Server,
+  Globe,
+  Terminal,
+  Database,
+  Cpu,
+  GitBranch,
+  Brackets,
+} from "lucide-react";
+import { motion } from "framer-motion";
 
 export default function Hero() {
   const containerVariants = {
@@ -12,15 +23,15 @@ export default function Hero() {
       opacity: 1,
       transition: {
         staggerChildren: 0.2,
-        delayChildren: 0.3
-      }
-    }
-  }
+        delayChildren: 0.3,
+      },
+    },
+  };
 
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0 }
-  }
+    visible: { opacity: 1, y: 0 },
+  };
 
   const floatingAnimation = (delay = 0) => ({
     y: [0, -15, 0],
@@ -29,9 +40,9 @@ export default function Hero() {
       duration: 4 + Math.random() * 2,
       repeat: Infinity,
       repeatType: "reverse" as const,
-      delay: delay
-    }
-  })
+      delay: delay,
+    },
+  });
 
   const techIcons = [
     { icon: <Terminal size={32} />, className: "top-1/4 left-1/5" },
@@ -42,9 +53,9 @@ export default function Hero() {
     { icon: <Code size={32} />, className: "bottom-20 left-40" },
     { icon: <Globe size={32} />, className: "bottom-56 left-40" },
     { icon: <Server size={32} />, className: "bottom-40 right-40" },
-  ]
+  ];
 
-  const nameLetters = "Sreejith Nair".split("")
+  const nameLetters = "Sreejith Nair".split("");
 
   return (
     <section className="py-24 md:py-32 min-h-screen flex flex-col items-center justify-center text-center relative overflow-hidden">
@@ -83,14 +94,14 @@ export default function Hero() {
                       key={index}
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
-                      transition={{ 
+                      transition={{
                         delay: 0.8 + index * 0.05,
-                        duration: 0.3
+                        duration: 0.3,
                       }}
-                      whileHover={{ 
+                      whileHover={{
                         scale: 1.2,
                         color: "#00FFFF",
-                        transition: { duration: 0.2 } 
+                        transition: { duration: 0.2 },
                       }}
                       className="inline-block origin-bottom relative"
                     >
@@ -119,11 +130,11 @@ export default function Hero() {
             variants={itemVariants}
           >
             <motion.div
-              className="whitespace-pre-wrap"
+              className="whitespace-pre-wrap text-start"
               animate={{ opacity: [0.8, 1, 0.8] }}
               transition={{ duration: 2, repeat: Infinity }}
             >
-              {`Full-Stack Developer specializing \n in building exceptional digital experiences`}
+              {`I'm a passionate full-stack developer with 2 years of \nexperience building web applications.\n\nI have experience working with React, Next.js, Node.js, Laravel, and Spring Boot,\nallowing me to develop both frontend and backend solutions efficiently.`}
             </motion.div>
             <div className="absolute top-2 right-2 flex space-x-1">
               <div className="h-3 w-3 rounded-full bg-red-500" />
@@ -137,27 +148,28 @@ export default function Hero() {
             className="flex flex-col sm:flex-row gap-4 justify-center pt-6"
             variants={itemVariants}
           >
-            <Button asChild size="lg" className="group relative overflow-hidden bg-cyan-400 hover:bg-cyan-300">
+            <Button
+              asChild
+              size="lg"
+              className="group relative overflow-hidden bg-cyan-400 hover:bg-cyan-300"
+            >
               <Link href="#projects" className="flex items-center">
-                <motion.span
-                  initial={{ x: 0 }}
-                  whileHover={{ x: -4 }}
-                >
+                <motion.span initial={{ x: 0 }} whileHover={{ x: -4 }}>
                   View My Work
                 </motion.span>
                 <motion.div
                   className="ml-2 relative"
                   whileHover={{
                     x: [0, 5, 0],
-                    transition: { 
+                    transition: {
                       repeat: Infinity,
-                      duration: 1
-                    }
+                      duration: 1,
+                    },
                   }}
                 >
                   <ArrowRight className="h-4 w-4" />
                 </motion.div>
-                <motion.div 
+                <motion.div
                   className="absolute inset-0 bg-primary/20"
                   initial={{ x: "-100%" }}
                   whileHover={{ x: "100%" }}
@@ -165,23 +177,33 @@ export default function Hero() {
                 />
               </Link>
             </Button>
-            
-            <Button variant="outline" size="lg" asChild className="group relative overflow-hidden">
-              <Link href="/resume.pdf" target="_blank" rel="noopener noreferrer" className="flex items-center">
+
+            <Button
+              variant="outline"
+              size="lg"
+              asChild
+              className="group relative overflow-hidden"
+            >
+              <Link
+                href="/resume/resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center"
+              >
                 <span>Download Resume</span>
                 <motion.div
                   className="ml-2"
-                  whileHover={{ 
+                  whileHover={{
                     y: [0, -3, 0],
-                    transition: { 
+                    transition: {
                       repeat: Infinity,
-                      duration: 1
-                    }
+                      duration: 1,
+                    },
                   }}
                 >
                   <Download className="h-4 w-4" />
                 </motion.div>
-                <motion.div 
+                <motion.div
                   className="absolute inset-0 bg-primary/10"
                   initial={{ y: "-100%" }}
                   whileHover={{ y: "100%" }}
@@ -218,5 +240,5 @@ export default function Hero() {
         ))}
       </div>
     </section>
-  )
+  );
 }

@@ -58,10 +58,11 @@ export default function About() {
                   </h3>
                 </div>
                 <p className="text-lg leading-relaxed text-muted-foreground">
-                  I&apos;m a passionate full-stack developer with over 5 years
-                  of experience building web applications. I specialize in
-                  JavaScript technologies across the stack, with expertise in
-                  React, Next.js, Node.js, and modern database solutions.
+                  I&apos;m a passionate full-stack developer with 2 years of
+                  experience building web applications. I have experience
+                  working with React, Next.js, Node.js, Laravel, and Spring
+                  Boot, allowing me to develop both frontend and backend
+                  solutions efficiently.
                 </p>
               </motion.div>
 
@@ -127,10 +128,11 @@ export default function About() {
                   </h3>
                 </div>
                 <p className="text-lg leading-relaxed text-muted-foreground">
-                  When I&apos;m not coding, you can find me hiking, reading tech
-                  blogs, or contributing to open-source projects. I believe in
-                  maintaining a healthy work-life balance and finding
-                  inspiration in diverse activities.
+                  When I&apos;m not coding, you can find me binge-watching
+                  series, watching documentaries, or reading tech blogs. I enjoy
+                  diving into different stories and ideas, whether through
+                  entertainment or technology, and believe in maintaining a
+                  balance between work and relaxation.
                 </p>
               </motion.div>
             </div>
@@ -229,7 +231,7 @@ export default function About() {
               </div>
 
               <div className="absolute -bottom-3 -left-3 bg-cyan-500 px-4 py-2 rounded-lg shadow-lg">
-                <p className="font-medium text-cyan-50">5+ Years Experience</p>
+                <p className="font-medium text-cyan-50">2+ Years Experience</p>
               </div>
             </motion.div>
           </ScrollReveal>
