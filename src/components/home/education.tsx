@@ -11,7 +11,7 @@ import { GraduationCap, Award, Calendar, BookOpen } from "lucide-react";
 import { motion } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import ScrollReveal from "@/components/scroll-reveal";
+import ScrollReveal from "@/components/ui/scroll-reveal";
 import Link from "next/link";
 import { ACADEMICS, CERTIFICATIONS } from "@/utils/education";
 import { gridPatternStyle } from "@/utils/constants";

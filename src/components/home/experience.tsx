@@ -8,7 +8,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import ScrollReveal from "@/components/scroll-reveal";
+import ScrollReveal from "@/components/ui/scroll-reveal";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Calendar, Briefcase } from "lucide-react";
 import { useRef } from "react";

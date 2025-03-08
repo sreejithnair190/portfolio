@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { ExternalLink, Github } from "lucide-react"
-import ScrollReveal from "@/components/scroll-reveal"
+import ScrollReveal from "@/components/ui/scroll-reveal"
 import { motion } from "framer-motion"
 
 type Project = {

@@ -2,7 +2,7 @@
 
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import ScrollReveal from "@/components/scroll-reveal"
+import ScrollReveal from "@/components/ui/scroll-reveal"
 import { motion } from "framer-motion"
 import { gridPatternStyle } from "@/utils/constants"
 import { SKILLS } from "@/utils/skills"
