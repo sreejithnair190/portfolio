@@ -14,10 +14,10 @@ export default function SmoothScrollProvider({ children }: SmoothScrollProviderP
     const lenis = new Lenis({
       duration: 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      direction: "vertical",
-      gestureDirection: "vertical",
-      smooth: true,
-      smoothTouch: false,
+      orientation: "vertical", 
+      gestureOrientation: "vertical", 
+      smoothWheel: true,
+      syncTouch: false,
       touchMultiplier: 2,
     })
 
@@ -47,9 +47,9 @@ export default function SmoothScrollProvider({ children }: SmoothScrollProviderP
 
         if (targetId && targetId !== "#") {
           const targetElement = document.querySelector(targetId)
-          if (targetElement && lenisRef.current) {
+          if (targetElement instanceof HTMLElement && lenisRef.current) {
             lenisRef.current.scrollTo(targetElement, {
-              offset: -100, // Adjust offset to account for fixed header
+              offset: -100,
             })
           }
         }

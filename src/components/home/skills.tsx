@@ -53,7 +53,7 @@ export default function Skills() {
   return (
     <section
       id="skills"
-      className="py-20 md:py-28 relative bg-gradient-to-b from-muted/30 to-background"
+      className="py-20 md:py-28 relative"
     >
       <style jsx>{gridPatternStyle}</style>
       <div className="absolute inset-0 bg-grid-pattern opacity-5 pointer-events-none"></div>
