@@ -8,6 +8,8 @@ import { email, github_url, linkedIn_url } from "@/utils/constants";
 import { Mail } from "lucide-react";
 import AboutIconWrapper from "./wrappers/about-icon-wrapper";
 import AboutImageWrapper from "./wrappers/about-image-wrapper";
+import { Suspense } from 'react'
+import ImageLoader from "@/components/image-loader";
 
 export default function About() {
   return (
@@ -126,13 +128,15 @@ export default function About() {
             <AboutImageWrapper>
               <div className="relative w-72 h-72 md:w-96 md:h-96 overflow-hidden rounded-2xl border-4 border-cyan-500/30 group">
                 <div className="w-full h-full relative overflow-hidden">
+                <Suspense fallback={<ImageLoader />}>
                   <Image
-                    src="/profile.jpg"
+                    src="/profile.webp"
                     alt="Sreejith Nair"
                     fill
                     className="object-cover transition-filter duration-500 ease-in-out sm:filter sm:grayscale sm:group-hover:filter-none"
                     priority
                   />
+                </Suspense>
                 </div>
               </div>
 
