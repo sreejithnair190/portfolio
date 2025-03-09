@@ -189,15 +189,6 @@ export default function Footer() {
           </motion.div>
         </div>
       </div>
-      
-      <style jsx>{`
-        .bg-grid-pattern {
-          background-size: 40px 40px;
-          background-image: 
-            linear-gradient(to right, rgba(0, 0, 0, 0.05) 1px, transparent 1px),
-            linear-gradient(to bottom, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
-        }
-      `}</style>
     </motion.footer>
   );
 } 
