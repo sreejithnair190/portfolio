@@ -4,7 +4,7 @@ import Skills from "@/components/home/skills-section/skills"
 // import Projects from "@/components/home/projects"
 import Experience from "@/components/home/experience"
 import Education from "@/components/home/education-section/education"
-import Contact from "@/components/home/contact"
+import Contact from "@/components/home/contact-section/contact"
 
 export default function Home() {
   return (
