@@ -13,134 +13,36 @@ import ImageLoader from "@/components/image-loader";
 
 export default function About() {
   return (
-    <section id="about" className="py-20 md:py-32 relative">
+    <section id="about" className="py-12 md:py-24 relative">
       <div className="container px-4 md:px-8 max-w-6xl mx-auto">
         <SectionReveal
           title="About Me"
           subtitle="Full-stack developer passionate about creating elegant solutions to
-            complex problems way"
+            complex problems"
         />
-        <div className="grid gap-12 lg:grid-cols-2 items-center">
-          <ScrollReveal direction="right" className="order-2 lg:order-1">
-            <div className="space-y-8">
-              <AboutCardWrapper>
-                <div className="flex items-center mb-4">
-                  <div className="w-10 h-10 rounded-full bg-cyan-100/20 flex items-center justify-center mr-4">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="20"
-                      height="20"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="text-cyan-500"
-                    >
-                      <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                      <circle cx="12" cy="7" r="4"></circle>
-                    </svg>
-                  </div>
-                  <h3 className="text-xl font-semibold bg-gradient-to-r from-cyan-400 to-cyan-600 bg-clip-text text-transparent">
-                    Who I Am
-                  </h3>
-                </div>
-                <p className="text-lg leading-relaxed text-muted-foreground">
-                  I&apos;m a passionate full-stack developer with 2 years of
-                  experience building web applications. I have experience
-                  working with React, Next.js, Node.js, Laravel, and Spring
-                  Boot, allowing me to develop both frontend and backend
-                  solutions efficiently.
-                </p>
-              </AboutCardWrapper>
-
-              <AboutCardWrapper>
-                <div className="flex items-center mb-4">
-                  <div className="w-10 h-10 rounded-full bg-cyan-100/20 flex items-center justify-center mr-4">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="20"
-                      height="20"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="text-cyan-500"
-                    >
-                      <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
-                      <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
-                    </svg>
-                  </div>
-                  <h3 className="text-xl font-semibold bg-gradient-to-r from-cyan-400 to-cyan-600 bg-clip-text text-transparent">
-                    My Approach
-                  </h3>
-                </div>
-                <p className="text-lg leading-relaxed text-muted-foreground">
-                  My approach combines clean code principles with user-centered
-                  design to create applications that are both technically
-                  excellent and delightful to use. I&apos;m constantly learning
-                  and exploring new technologies to stay at the forefront of web
-                  development.
-                </p>
-              </AboutCardWrapper>
-
-              <AboutCardWrapper>
-                <div className="flex items-center mb-4">
-                  <div className="w-10 h-10 rounded-full bg-cyan-100/20 flex items-center justify-center mr-4">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="20"
-                      height="20"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="text-cyan-500"
-                    >
-                      <circle cx="12" cy="12" r="10"></circle>
-                      <path d="M12 6v6l4 2"></path>
-                    </svg>
-                  </div>
-                  <h3 className="text-xl font-semibold bg-gradient-to-r from-cyan-400 to-cyan-600 bg-clip-text text-transparent">
-                    Beyond Coding
-                  </h3>
-                </div>
-                <p className="text-lg leading-relaxed text-muted-foreground">
-                  When I&apos;m not coding, you can find me binge-watching
-                  series, watching documentaries, or reading tech blogs. I enjoy
-                  diving into different stories and ideas, whether through
-                  entertainment or technology, and believe in maintaining a
-                  balance between work and relaxation.
-                </p>
-              </AboutCardWrapper>
-            </div>
-          </ScrollReveal>
-
+        <div className="grid gap-8 lg:gap-12 lg:grid-cols-2 items-center">
+          {/* Image Section - Always first on mobile, second on desktop */}
           <ScrollReveal
             direction="left"
-            className="order-1 lg:order-2 flex justify-center"
+            className="flex justify-center lg:order-2 mb-8 lg:mb-0"
           >
             <AboutImageWrapper>
-              <div className="relative w-72 h-72 md:w-96 md:h-96 overflow-hidden rounded-2xl border-4 border-cyan-500/30 group">
+              <div className="relative w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 overflow-hidden rounded-2xl border-4 border-cyan-500/30 group">
                 <div className="w-full h-full relative overflow-hidden">
-                <Suspense fallback={<ImageLoader />}>
-                  <Image
-                    src="/profile.webp"
-                    alt="Sreejith Nair"
-                    fill
-                    className="object-cover transition-filter duration-500 ease-in-out sm:filter sm:grayscale sm:group-hover:filter-none"
-                    priority
-                  />
-                </Suspense>
+                  <Suspense fallback={<ImageLoader />}>
+                    <Image
+                      src="/profile.webp"
+                      alt="Sreejith Nair"
+                      fill
+                      className="object-cover transition-filter duration-500 ease-in-out sm:filter sm:grayscale sm:group-hover:filter-none"
+                      priority
+                    />
+                  </Suspense>
                 </div>
               </div>
 
-              <div className="absolute -bottom-6 -right-6 bg-card p-4 rounded-xl shadow-lg border border-cyan-100/20 backdrop-blur-sm">
+              {/* Social links - responsive positioning */}
+               <div className="absolute -bottom-6 -right-6 bg-card p-4 rounded-xl shadow-lg border border-cyan-100/20 backdrop-blur-sm">
                 <div className="flex gap-4">
                   <AboutIconWrapper>
                     <Link
@@ -172,10 +74,112 @@ export default function About() {
                 </div>
               </div>
 
-              <div className="absolute hidden md:block -bottom-3 -left-3 bg-cyan-500 px-4 py-2 rounded-lg shadow-lg">
-                <p className="font-medium text-cyan-50">2+ Years Experience</p>
+              {/* Experience badge - responsive positioning */}
+              <div className="hidden md:block absolute -bottom-2 -left-2 md:-bottom-3 md:-left-3 bg-cyan-500 px-3 py-1 md:px-4 md:py-2 rounded-lg shadow-lg">
+                <p className="text-sm md:text-base font-medium text-cyan-50">2+ Years Experience</p>
               </div>
             </AboutImageWrapper>
+          </ScrollReveal>
+
+          {/* Text Content - Always second on mobile, first on desktop */}
+          <ScrollReveal direction="right" className="lg:order-1">
+            <div className="space-y-6 md:space-y-8">
+              <AboutCardWrapper>
+                <div className="flex items-center mb-3 md:mb-4">
+                  <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-cyan-100/20 flex items-center justify-center mr-3 md:mr-4">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="text-cyan-500 md:w-5 md:h-5"
+                    >
+                      <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                      <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                  </div>
+                  <h3 className="text-lg md:text-xl font-semibold bg-gradient-to-r from-cyan-400 to-cyan-600 bg-clip-text text-transparent">
+                    Who I Am
+                  </h3>
+                </div>
+                <p className="text-base md:text-lg leading-relaxed text-muted-foreground">
+                  I&apos;m a passionate full-stack developer with 2 years of
+                  experience building web applications. I have experience
+                  working with React, Next.js, Node.js, Laravel, and Spring
+                  Boot, allowing me to develop both frontend and backend
+                  solutions efficiently.
+                </p>
+              </AboutCardWrapper>
+
+              <AboutCardWrapper>
+                <div className="flex items-center mb-3 md:mb-4">
+                  <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-cyan-100/20 flex items-center justify-center mr-3 md:mr-4">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="text-cyan-500 md:w-5 md:h-5"
+                    >
+                      <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+                      <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+                    </svg>
+                  </div>
+                  <h3 className="text-lg md:text-xl font-semibold bg-gradient-to-r from-cyan-400 to-cyan-600 bg-clip-text text-transparent">
+                    My Approach
+                  </h3>
+                </div>
+                <p className="text-base md:text-lg leading-relaxed text-muted-foreground">
+                  My approach combines clean code principles with user-centered
+                  design to create applications that are both technically
+                  excellent and delightful to use. I&apos;m constantly learning
+                  and exploring new technologies to stay at the forefront of web
+                  development.
+                </p>
+              </AboutCardWrapper>
+
+              <AboutCardWrapper>
+                <div className="flex items-center mb-3 md:mb-4">
+                  <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-cyan-100/20 flex items-center justify-center mr-3 md:mr-4">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="text-cyan-500 md:w-5 md:h-5"
+                    >
+                      <circle cx="12" cy="12" r="10"></circle>
+                      <path d="M12 6v6l4 2"></path>
+                    </svg>
+                  </div>
+                  <h3 className="text-lg md:text-xl font-semibold bg-gradient-to-r from-cyan-400 to-cyan-600 bg-clip-text text-transparent">
+                    Beyond Coding
+                  </h3>
+                </div>
+                <p className="text-base md:text-lg leading-relaxed text-muted-foreground">
+                  When I&apos;m not coding, you can find me binge-watching
+                  series, watching documentaries, or reading tech blogs. I enjoy
+                  diving into different stories and ideas, whether through
+                  entertainment or technology, and believe in maintaining a
+                  balance between work and relaxation.
+                </p>
+              </AboutCardWrapper>
+            </div>
           </ScrollReveal>
         </div>
       </div>

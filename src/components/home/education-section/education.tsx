@@ -28,11 +28,10 @@ export default function Education() {
       <div className="container px-4 md:px-6 relative">
         <SectionReveal
           title="Education & Certifications"
-          subtitle="Academic journey and professional credentials that shape my
-            expertise"
+          subtitle="Academic journey and professional credentials that shape my expertise"
         />
 
-        <div className="grid gap-16 md:grid-cols-2">
+        <div className="grid gap-16 grid-cols-1 md:grid-cols-2 lg:gap-24">
           {/* Education */}
           <div className="space-y-8">
             <div className="flex items-center gap-4 mb-8">
@@ -44,38 +43,39 @@ export default function Education() {
 
             {ACADEMICS.map((edu, index) => (
               <EducationCardWrapper idx={index} key={index}>
-                  <Card className="overflow-visible backdrop-blur-sm bg-card/95 border border-cyan-100/20 hover:border-cyan-300/30 transition-colors shadow-lg hover:shadow-[0_0_25px_rgba(103,232,249,0.1)]">
-                    <CardHeader className="pb-2">
-                      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2">
-                        <div>
-                          <EducationTitleWrapper>
-                            <CardTitle className="text-xl md:text-xl text-cyan-500">
-                              {edu.degree}
-                            </CardTitle>
-                          </EducationTitleWrapper>
-                          <EducationDescriptionWrapper>
-                            <CardDescription className="text-lg font-medium bg-gradient-to-r from-cyan-300 to-cyan-400 bg-clip-text text-transparent">
-                              {edu.institution}
-                            </CardDescription>
-                          </EducationDescriptionWrapper>
-                        </div>
-                        <EducationPeriodWrapper>
-                          <Badge variant="secondary" className="px-3 py-1.5">
-                            <Calendar className="h-4 w-4 mr-2 text-cyan-500" />
-                            {edu.period}
-                          </Badge>
-                        </EducationPeriodWrapper>
+                <Card className="w-full overflow-visible backdrop-blur-sm bg-card/95 border border-cyan-100/20 hover:border-cyan-300/30 transition-colors shadow-lg hover:shadow-[0_0_25px_rgba(103,232,249,0.1)]">
+                  <CardHeader className="pb-2">
+                    <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+                      <div className="flex-grow">
+                        <EducationTitleWrapper>
+                          <CardTitle className="text-xl text-cyan-500">
+                            {edu.degree}
+                          </CardTitle>
+                        </EducationTitleWrapper>
+                        <EducationDescriptionWrapper>
+                          <CardDescription className="text-base font-medium bg-gradient-to-r from-cyan-300 to-cyan-400 bg-clip-text text-transparent">
+                            {edu.institution}
+                          </CardDescription>
+                        </EducationDescriptionWrapper>
                       </div>
-                    </CardHeader>
-                    {edu.description && (
-                      <CardContent>
-                        <p>
-                          {edu.description}
-                        </p>
-                      </CardContent>
-                    )}
-                  </Card>
-                </EducationCardWrapper>
+                      <EducationPeriodWrapper>
+                        <Badge 
+                          variant="secondary" 
+                          className="px-3 py-1.5 w-full md:w-auto text-center"
+                        >
+                          <Calendar className="h-4 w-4 mr-2 text-cyan-500" />
+                          {edu.period}
+                        </Badge>
+                      </EducationPeriodWrapper>
+                    </div>
+                  </CardHeader>
+                  {edu.description && (
+                    <CardContent className="text-sm sm:text-base">
+                      {edu.description}
+                    </CardContent>
+                  )}
+                </Card>
+              </EducationCardWrapper>
             ))}
           </div>
 
@@ -88,33 +88,35 @@ export default function Education() {
               <TitleWrapper>Certifications</TitleWrapper>
             </div>
 
-            <div className="grid gap-6 sm:grid-cols-2">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6">
               {CERTIFICATIONS.map((cert, index) => (
                 <CertificationCardWrapper idx={index} key={index}>
-                  <Card className="h-full backdrop-blur-sm bg-card/95 border border-cyan-100/20 hover:border-cyan-300/30 shadow-lg hover:shadow-[0_0_15px_rgba(103,232,249,0.1)]">
+                  <Card className="h-full w-full backdrop-blur-sm bg-card/95 border border-cyan-100/20 hover:border-cyan-300/30 shadow-lg hover:shadow-[0_0_15px_rgba(103,232,249,0.1)]">
                     <CardHeader className="pb-2">
                       <div className="flex items-center gap-3">
                         <CertificationIconWrapper>
                           <Award className="h-5 w-5 text-cyan-500" />
                         </CertificationIconWrapper>
-                        <CardTitle className="text-lg font-semibold">
+                        <CardTitle className="text-base sm:text-lg font-semibold truncate">
                           {cert.name}
                         </CardTitle>
                       </div>
                     </CardHeader>
                     <CardContent>
                       <div className="flex flex-col gap-3">
-                        <p className="text-sm font-medium text-cyan-300">
+                        <p className="text-xs sm:text-sm font-medium text-cyan-300 truncate">
                           {cert.issuer}
                         </p>
-                        <div className="flex justify-between items-center">
-                          <Badge variant="secondary">{cert.date}</Badge>
+                        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
+                          <Badge variant="secondary" className="w-full sm:w-auto text-center">
+                            {cert.date}
+                          </Badge>
                           {cert.url && (
                             <Button
                               asChild
                               variant="ghost"
                               size="sm"
-                              className="text-cyan-500 hover:bg-cyan-500/10"
+                              className="text-cyan-500 hover:bg-cyan-500/10 w-full sm:w-auto"
                             >
                               <Link href={cert.url} target="_blank">
                                 View
