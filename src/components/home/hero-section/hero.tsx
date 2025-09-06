@@ -95,7 +95,7 @@ export default function Hero() {
               className="group relative overflow-hidden"
             >
               <Link
-                href="/resume/resume.pdf"
+                href="/resume/070925.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center"
