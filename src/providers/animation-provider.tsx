@@ -14,14 +14,17 @@ const AnimationContext = createContext<AnimationContextType>({
 
 export const useAnimation = () => useContext(AnimationContext)
 
+// Fixed loading duration per Requirements 4.1
+const LOADING_DURATION = 1.5
+
 export function AnimationProvider({ children }: { children: React.ReactNode }) {
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-    // Simulate loading time with a slightly more random feel
+    // Fixed 1.5s duration (Requirements 4.1)
     const timer = setTimeout(() => {
       setIsLoading(false)
-    }, 1500 + Math.random() * 500) // Between 1.5 and 2 seconds
+    }, LOADING_DURATION * 1000)
 
     return () => clearTimeout(timer)
   }, [])
@@ -32,28 +35,29 @@ export function AnimationProvider({ children }: { children: React.ReactNode }) {
         {isLoading ? (
           <motion.div
             key="loader"
-            className="fixed inset-0 z-50 flex items-center justify-center bg-background"
+            className="fixed inset-0 z-50 flex items-center justify-center bg-background will-change-transform"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ 
               opacity: 0,
               transition: { 
-                duration: 0.7, 
-                ease: [0.65, 0, 0.35, 1] // Improved easing curve
+                duration: 0.5, 
+                ease: [0.65, 0, 0.35, 1]
               }
             }}
           >
-            <LoadingAnimation />
+            <LoadingAnimation duration={LOADING_DURATION} />
           </motion.div>
         ) : (
           <motion.div 
-            key="content" 
+            key="content"
+            className="will-change-transform"
             initial={{ opacity: 0 }} 
             animate={{ 
               opacity: 1,
               transition: { 
-                duration: 0.7,
-                delay: 0.2, 
+                duration: 0.5,
+                delay: 0.1, 
                 ease: [0.22, 1, 0.36, 1] 
               }
             }}
@@ -66,11 +70,16 @@ export function AnimationProvider({ children }: { children: React.ReactNode }) {
   )
 }
 
-function LoadingAnimation() {
+
+interface LoadingAnimationProps {
+  duration: number
+}
+
+function LoadingAnimation({ duration }: LoadingAnimationProps) {
   const progressControls = useAnimationControls()
   const [loadingStage, setLoadingStage] = useState(0)
   
-  // Text phrases that will cycle (all kept short to ensure single line)
+  // Text phrases that will cycle
   const loadingPhrases = [
     "Loading Portfolio",
     "Preparing Projects",
@@ -79,149 +88,81 @@ function LoadingAnimation() {
   ]
 
   useEffect(() => {
-    // Animate the progress bar with a more natural progression
+    // Animate the progress bar
     progressControls.start({
       width: "100%",
       transition: {
-        duration: 1.5,
-        ease: [0.34, 1.3, 0.64, 1], // More dynamic feel with slight overshoot
+        duration: duration,
+        ease: [0.34, 1.3, 0.64, 1],
       },
     })
     
     // Change loading text phrases
     const phraseInterval = setInterval(() => {
       setLoadingStage(prev => (prev + 1) % loadingPhrases.length)
-    }, 800)
+    }, (duration * 1000) / loadingPhrases.length)
     
     return () => clearInterval(phraseInterval)
-  }, [progressControls, loadingPhrases.length])
+  }, [progressControls, duration, loadingPhrases.length])
 
   return (
     <div className="relative flex flex-col items-center justify-center gap-8 px-4 w-full max-w-md">
-      {/* Subtle background pulse */}
-      <motion.div 
-        className="absolute inset-0 bg-cyan-500/5 rounded-xl"
-        animate={{ 
-          scale: [1, 1.05, 1],
-          opacity: [0.1, 0.15, 0.1]
-        }}
-        transition={{
-          duration: 3,
-          repeat: Infinity,
-          ease: "easeInOut"
-        }}
-      />
-      
-      {/* Improved progress bar */}
+      {/* Progress bar - simplified, no infinite animations (Requirements 4.2) */}
       <motion.div
-        className="relative w-full max-w-sm overflow-visible"
+        className="relative w-full max-w-sm overflow-visible will-change-transform"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
+        transition={{ duration: 0.3 }}
       >
         {/* Progress bar background */}
         <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden shadow-inner">
-          {/* Enhanced glow effect */}
+          {/* Glow effect - follows progress, no infinite animation */}
           <motion.div
-            className="absolute inset-0 blur-md bg-cyan-400 opacity-60 rounded-full"
+            className="absolute inset-0 blur-md bg-cyan-400 opacity-60 rounded-full will-change-transform"
             initial={{ width: 0 }}
             animate={progressControls}
           />
 
-          {/* Main progress bar with gradient */}
+          {/* Main progress bar with gradient (Requirements 4.3 - GPU accelerated) */}
           <motion.div
-            className="h-full bg-gradient-to-r from-cyan-300 via-cyan-400 to-cyan-500 rounded-full relative"
+            className="h-full bg-gradient-to-r from-cyan-300 via-cyan-400 to-cyan-500 rounded-full relative will-change-transform"
             initial={{ width: 0 }}
             animate={progressControls}
-          >
-            {/* Multiple shimmer effects for more dynamic feel */}
-            {[0, 1].map((i) => (
-              <motion.div
-                key={i}
-                className="absolute inset-0 w-full"
-                initial={{ x: "-100%" }}
-                animate={{ x: "100%" }}
-                transition={{
-                  repeat: Number.POSITIVE_INFINITY,
-                  duration: 1.2 + i * 0.3,
-                  ease: "linear",
-                  delay: i * 0.2,
-                }}
-              >
-                <div className="w-1/4 h-full bg-gradient-to-r from-transparent via-cyan-200/30 to-transparent" />
-              </motion.div>
-            ))}
-          </motion.div>
+          />
         </div>
 
-        {/* Animated percentage indicator with glow effect */}
+        {/* Percentage indicator */}
         <motion.div
           className="absolute -right-2 -top-7 text-sm font-semibold text-cyan-500 flex items-center bg-background dark:bg-gray-900 px-2 py-1 rounded-md shadow-md"
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.2, duration: 0.4 }}
+          transition={{ delay: 0.1, duration: 0.3 }}
         >
-          <Counter from={0} to={100} duration={1.5} />
+          <Counter from={0} to={100} duration={duration} />
           <span className="ml-0.5">%</span>
         </motion.div>
       </motion.div>
 
-      {/* Enhanced loading text with animation - now with fixed width to prevent layout shifts */}
+      {/* Loading text - simplified animation, no infinite loops */}
       <div className="relative h-8 w-full max-w-sm text-center">
         <AnimatePresence mode="wait">
           <motion.p
             key={loadingStage}
-            className="absolute inset-0 text-lg font-medium text-cyan-500 drop-shadow-sm whitespace-nowrap overflow-hidden"
+            className="absolute inset-0 text-lg font-medium text-cyan-500 drop-shadow-sm whitespace-nowrap overflow-hidden will-change-transform"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.3 }}
+            transition={{ duration: 0.2 }}
           >
-            <span className="inline-block">
-              {loadingPhrases[loadingStage]}
-              <motion.span
-                initial={{ opacity: 0 }}
-                animate={{ 
-                  opacity: [0, 1, 0],
-                }}
-                transition={{
-                  repeat: Number.POSITIVE_INFINITY,
-                  duration: 1,
-                  times: [0, 0.5, 1],
-                  ease: "easeInOut",
-                }}
-              >
-                ...
-              </motion.span>
-            </span>
+            {loadingPhrases[loadingStage]}...
           </motion.p>
         </AnimatePresence>
-      </div>
-
-      {/* Simplified pulse indicators */}
-      <div className="flex space-x-3 mt-2">
-        {[0, 1, 2].map((i) => (
-          <motion.div
-            key={i}
-            className="w-2 h-2 bg-cyan-500 rounded-full"
-            animate={{
-              scale: [1, 1.5, 1],
-              opacity: [0.5, 1, 0.5]
-            }}
-            transition={{
-              duration: 1,
-              repeat: Infinity,
-              delay: i * 0.2,
-              ease: "easeInOut"
-            }}
-          />
-        ))}
       </div>
     </div>
   )
 }
 
-// Enhanced counter component with smoother animation
+// Counter component with proper cleanup (Requirements 4.4)
 function Counter({ from, to, duration }: { from: number; to: number; duration: number }) {
   const [count, setCount] = useState(from)
 
@@ -233,7 +174,7 @@ function Counter({ from, to, duration }: { from: number; to: number; duration: n
       if (!startTime) startTime = timestamp
       const progress = Math.min((timestamp - startTime) / (duration * 1000), 1)
       
-      // Use easing function for more natural counting
+      // Easing function for natural counting
       const easeOutQuint = (t: number) => 1 - Math.pow(1 - t, 5)
       const easedProgress = easeOutQuint(progress)
       
@@ -246,6 +187,7 @@ function Counter({ from, to, duration }: { from: number; to: number; duration: n
 
     animationFrame = requestAnimationFrame(updateCount)
 
+    // Cleanup animation frame on unmount (Requirements 4.4)
     return () => cancelAnimationFrame(animationFrame)
   }, [from, to, duration])
 

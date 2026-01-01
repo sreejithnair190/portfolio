@@ -14,17 +14,14 @@ const itemVariants = {
 const TerminalCard = ({ text }: TerminalCardProps) => {
   return (
     <motion.div
-      className="relative mx-auto max-w-2xl overflow-hidden rounded-lg bg-foreground/5 p-4 font-mono text-sm"
+      className="relative mx-auto max-w-2xl overflow-hidden rounded-lg bg-foreground/5 p-4 font-mono text-sm border border-cyan-500/20"
       variants={itemVariants}
     >
-      {/* Animated text */}
-      <motion.div
-        className="whitespace-pre-wrap text-start"
-        animate={{ opacity: [0.8, 1, 0.8] }}
-        transition={{ duration: 2, repeat: Infinity }}
-      >
+      {/* Static text with CSS blinking cursor */}
+      <div className="whitespace-pre-wrap text-start">
         {text}
-      </motion.div>
+        <span className="terminal-cursor" />
+      </div>
 
       {/* Traffic light dots */}
       <div className="absolute top-2 right-2 flex space-x-1">

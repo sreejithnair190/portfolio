@@ -9,6 +9,7 @@ import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import SmoothScrollProvider from "@/providers/smooth-scroll-provider";
 import { root_keywords } from "@/utils/keywords";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -56,6 +57,7 @@ export default function RootLayout({
             </SmoothScrollProvider>
           </AnimationProvider>
         </ThemeProvider>
+        <SpeedInsights />
       </body>
     </html>
   );

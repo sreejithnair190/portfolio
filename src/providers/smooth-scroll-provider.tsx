@@ -1,41 +1,16 @@
 "use client"
 
-import { type ReactNode, useEffect, useRef } from "react"
-import Lenis from "lenis"
+import { type ReactNode, useEffect } from "react"
+import { ReactLenis, useLenis } from "lenis/react"
 
 interface SmoothScrollProviderProps {
   children: ReactNode
 }
 
-export default function SmoothScrollProvider({ children }: SmoothScrollProviderProps) {
-  const lenisRef = useRef<Lenis | null>(null)
+// Custom hook to handle anchor link clicks with smooth scrolling
+function useAnchorScroll() {
+  const lenis = useLenis()
 
-  useEffect(() => {
-    const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      orientation: "vertical", 
-      gestureOrientation: "vertical", 
-      smoothWheel: true,
-      syncTouch: false,
-      touchMultiplier: 2,
-    })
-
-    lenisRef.current = lenis
-
-    function raf(time: number) {
-      lenis.raf(time)
-      requestAnimationFrame(raf)
-    }
-
-    requestAnimationFrame(raf)
-
-    return () => {
-      lenis.destroy()
-    }
-  }, [])
-
-  // Handle anchor links with smooth scrolling
   useEffect(() => {
     const handleAnchorClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement
@@ -45,10 +20,10 @@ export default function SmoothScrollProvider({ children }: SmoothScrollProviderP
         e.preventDefault()
         const targetId = anchor.getAttribute("href")
 
-        if (targetId && targetId !== "#") {
+        if (targetId && targetId !== "#" && lenis) {
           const targetElement = document.querySelector(targetId)
-          if (targetElement instanceof HTMLElement && lenisRef.current) {
-            lenisRef.current.scrollTo(targetElement, {
+          if (targetElement instanceof HTMLElement) {
+            lenis.scrollTo(targetElement, {
               offset: -100,
             })
           }
@@ -58,8 +33,31 @@ export default function SmoothScrollProvider({ children }: SmoothScrollProviderP
 
     document.addEventListener("click", handleAnchorClick)
     return () => document.removeEventListener("click", handleAnchorClick)
-  }, [])
+  }, [lenis])
 
-  return <>{children}</>
+  return null
 }
 
+// Inner component that uses the lenis context
+function AnchorScrollHandler() {
+  useAnchorScroll()
+  return null
+}
+
+export default function SmoothScrollProvider({ children }: SmoothScrollProviderProps) {
+  return (
+    <ReactLenis
+      root
+      options={{
+        duration: 1.0,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        smoothWheel: true,
+        syncTouch: false,
+        touchMultiplier: 1.5,
+      }}
+    >
+      <AnchorScrollHandler />
+      {children}
+    </ReactLenis>
+  )
+}

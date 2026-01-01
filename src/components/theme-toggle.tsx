@@ -1,31 +1,47 @@
-"use client"
-import { Moon, Sun } from "lucide-react"
-import { useTheme } from "next-themes"
-import { motion } from "framer-motion"
-
-import { Button } from "@/components/ui/button"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
+"use client";
+import { Moon, Sun } from "lucide-react";
+import { useTheme } from "next-themes";
+import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 
 export function ThemeToggle() {
-  const { setTheme } = useTheme()
+  const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return (
+      <div className="w-14 h-7 rounded-full bg-muted" />
+    );
+  }
+
+  const isDark = theme === "dark";
+
+  const toggleTheme = () => {
+    setTheme(isDark ? "light" : "dark");
+  };
 
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <motion.div whileHover={{ rotate: 15 }} whileTap={{ scale: 0.9 }}>
-          <Button variant="outline" size="icon" className="rounded-full">
-            <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-            <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-            <span className="sr-only">Toggle theme</span>
-          </Button>
-        </motion.div>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
-        <DropdownMenuItem onClick={() => setTheme("light")}>Light</DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("dark")}>Dark</DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("system")}>System</DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
-  )
+    <motion.button
+      onClick={toggleTheme}
+      className="relative w-14 h-7 rounded-full bg-muted border border-cyan-100/20 p-1 cursor-pointer"
+      whileTap={{ scale: 0.95 }}
+      aria-label={`Switch to ${isDark ? "light" : "dark"} mode`}
+    >
+      <motion.div
+        className="absolute top-1 w-5 h-5 rounded-full bg-cyan-500 flex items-center justify-center shadow-md"
+        animate={{ x: isDark ? 26 : 2 }}
+        transition={{ type: "spring", stiffness: 500, damping: 30 }}
+      >
+        {isDark ? (
+          <Moon className="h-3 w-3 text-white" />
+        ) : (
+          <Sun className="h-3 w-3 text-white" />
+        )}
+      </motion.div>
+    </motion.button>
+  );
 }
-

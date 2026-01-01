@@ -19,7 +19,7 @@ export default function Footer() {
 
   return (
     <motion.footer
-      className="py-8 md:py-12 relative"
+      className="py-8 md:py-12 relative flex justify-around"
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       viewport={{ once: true }}
@@ -49,23 +49,23 @@ export default function Footer() {
           </div>
           
           {/* Main Footer Content */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-3 sm:gap-8">
             {/* Contact Info */}
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="space-y-4"
+              className="space-y-3"
             >
-              <h4 className="text-lg font-semibold text-cyan-500">Contact</h4>
-              <ul className="space-y-2">
+              <h4 className="text-base font-semibold text-cyan-500">Contact</h4>
+              <ul className="space-y-2 text-sm">
                 <li>
                   <Link 
                     href="mailto:sreejith190nair@gmail.com" 
                     className="text-muted-foreground hover:text-cyan-400 flex items-center gap-2 group"
                   >
-                    <Mail className="h-4 w-4 group-hover:text-cyan-500 transition-colors" />
-                    sreejith190nair@gmail.com
+                    <Mail className="h-4 w-4 shrink-0 group-hover:text-cyan-500 transition-colors" />
+                    <span className="break-all">sreejith190nair@gmail.com</span>
                   </Link>
                 </li>
                 <li className="text-muted-foreground">Mumbai, India</li>
@@ -77,10 +77,10 @@ export default function Footer() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="space-y-4"
+              className="space-y-3"
             >
-              <h4 className="text-lg font-semibold text-cyan-500">Navigation</h4>
-              <ul className="grid grid-cols-2 gap-2">
+              <h4 className="text-base font-semibold text-cyan-500">Navigation</h4>
+              <ul className="grid grid-cols-2 gap-x-4 gap-y-1 text-sm">
                 <li>
                   <Link href="#home" className="text-muted-foreground hover:text-cyan-400">
                     Home
@@ -119,28 +119,28 @@ export default function Footer() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.3 }}
-              className="space-y-4"
+              className="space-y-3"
             >
-              <h4 className="text-lg font-semibold text-cyan-500">Connect</h4>
-              <div className="flex gap-4">
+              <h4 className="text-base font-semibold text-cyan-500">Connect</h4>
+              <div className="flex gap-2">
                 <motion.div 
                   whileHover={{ y: -5, scale: 1.1 }} 
                   transition={{ duration: 0.2 }}
-                  className="bg-cyan-100/10 p-3 rounded-xl border border-cyan-100/20 hover:border-cyan-300/30"
+                  className="bg-cyan-100/10 p-2.5 rounded-xl border border-cyan-100/20 hover:border-cyan-300/30"
                 >
                   <Link
                     href={`mailto:${email}`}
                     className="text-cyan-500"
                     aria-label="Email"
                   >
-                    <Mail className="h-5 w-5" />
+                    <Mail className="h-4 w-4" />
                   </Link>
                 </motion.div>
                 
                 <motion.div 
                   whileHover={{ y: -5, scale: 1.1 }} 
                   transition={{ duration: 0.2 }}
-                  className="bg-cyan-100/10 p-3 rounded-xl border border-cyan-100/20 hover:border-cyan-300/30"
+                  className="bg-cyan-100/10 p-2.5 rounded-xl border border-cyan-100/20 hover:border-cyan-300/30"
                 >
                   <Link
                     href={github_url}
@@ -149,14 +149,14 @@ export default function Footer() {
                     className="text-cyan-500"
                     aria-label="GitHub"
                   >
-                    <Github className="h-5 w-5" />
+                    <Github className="h-4 w-4" />
                   </Link>
                 </motion.div>
                 
                 <motion.div 
                   whileHover={{ y: -5, scale: 1.1 }} 
                   transition={{ duration: 0.2 }}
-                  className="bg-cyan-100/10 p-3 rounded-xl border border-cyan-100/20 hover:border-cyan-300/30"
+                  className="bg-cyan-100/10 p-2.5 rounded-xl border border-cyan-100/20 hover:border-cyan-300/30"
                 >
                   <Link
                     href={linkedIn_url}
@@ -165,12 +165,12 @@ export default function Footer() {
                     className="text-cyan-500"
                     aria-label="LinkedIn"
                   >
-                    <Linkedin className="h-5 w-5" />
+                    <Linkedin className="h-4 w-4" />
                   </Link>
                 </motion.div>
               </div>
               
-              <Badge variant="outline" className="mt-4 border-cyan-100/20">
+              <Badge variant="outline" className="border-cyan-100/20 text-xs">
                 Available for new opportunities
               </Badge>
             </motion.div>

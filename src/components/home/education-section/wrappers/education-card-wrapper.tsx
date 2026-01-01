@@ -29,7 +29,10 @@ const EducationCardWrapper = ({
         },
       }}
     >
-      <motion.div whileHover={{ y: -8 }} className="relative group">
+      <motion.div
+        whileHover={{ y: -8 }}
+        className="relative group [&>*]:transition-[border-color,box-shadow] [&>*]:duration-300 [&>*]:hover:border-cyan-300/40 [&>*]:hover:shadow-[0_0_25px_rgba(103,232,249,0.15)] dark:[&>*]:hover:border-cyan-300/30 dark:[&>*]:hover:shadow-[0_0_25px_rgba(103,232,249,0.1)]"
+      >
         {children}
       </motion.div>
     </motion.div>
