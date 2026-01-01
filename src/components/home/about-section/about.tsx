@@ -76,7 +76,7 @@ export default function About() {
 
               {/* Experience badge - responsive positioning */}
               <div className="hidden md:block absolute -bottom-2 -left-2 md:-bottom-3 md:-left-3 bg-cyan-500 px-3 py-1 md:px-4 md:py-2 rounded-lg shadow-lg">
-                <p className="text-sm md:text-base font-medium text-cyan-50">2+ Years Experience</p>
+                <p className="text-sm md:text-base font-medium text-cyan-50">3 Years Experience</p>
               </div>
             </AboutImageWrapper>
           </ScrollReveal>
@@ -108,7 +108,7 @@ export default function About() {
                   </h3>
                 </div>
                 <p className="text-base md:text-lg leading-relaxed text-muted-foreground">
-                  I&apos;m a passionate full-stack developer with 2 years of
+                  I&apos;m a passionate full-stack developer with 3 years of
                   experience building web applications. I have experience
                   working with React, Next.js, Node.js, Laravel, and Spring
                   Boot, allowing me to develop both frontend and backend

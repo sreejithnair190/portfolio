@@ -32,7 +32,7 @@ export default function Hero() {
   ];
 
   const nameLetters = "Sreejith Nair".split("");
-  const codeTerminalText = `I'm a passionate full-stack developer with 2 years of \nexperience building web applications.\n\nI have experience working with React, Next.js, Node.js, Laravel, and Spring Boot,\nallowing me to develop both frontend and backend solutions efficiently.`;
+  const codeTerminalText = `I'm a passionate full-stack developer with 3 years of \nexperience building web applications.\n\nI have experience working with React, Next.js, Node.js, Laravel, and Spring Boot,\nallowing me to develop both frontend and backend solutions efficiently.`;
 
   return (
     <section className="py-24 md:py-32 min-h-screen flex flex-col items-center justify-center text-center relative overflow-hidden">
