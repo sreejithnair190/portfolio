@@ -34,7 +34,7 @@ export default function About() {
                       src="/profile.webp"
                       alt="Sreejith Nair"
                       fill
-                      className="object-cover transition-filter duration-500 ease-in-out sm:filter sm:grayscale sm:group-hover:filter-none"
+                      className="object-cover transition-all duration-500 ease-in-out grayscale sm:group-hover:grayscale-0"
                       priority
                     />
                   </Suspense>

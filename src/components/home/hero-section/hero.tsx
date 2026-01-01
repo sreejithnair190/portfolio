@@ -4,8 +4,6 @@ import {
   ArrowRight,
   Download,
   Code,
-  Server,
-  Globe,
   Terminal,
   Database,
   Cpu,
@@ -31,8 +29,6 @@ export default function Hero() {
     { id: 4, icon: <GitBranch size={32} />, className: "bottom-1/4 left-1/3" },
     { id: 5, icon: <Brackets size={32} />, className: "top-40 left-40" },
     { id: 6, icon: <Code size={32} />, className: "bottom-20 left-40" },
-    { id: 7, icon: <Globe size={32} />, className: "bottom-56 left-40" },
-    { id: 8, icon: <Server size={32} />, className: "bottom-40 right-40" },
   ];
 
   const nameLetters = "Sreejith Nair".split("");
@@ -112,7 +108,7 @@ export default function Hero() {
       </div>
 
       <div className="absolute inset-0 -z-10">
-        {[...Array(20)].map((_, i) => (
+        {[...Array(6)].map((_, i) => (
           <Particle idx={i} key={i} />
         ))}
       </div>

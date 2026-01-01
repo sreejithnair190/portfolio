@@ -1,30 +1,50 @@
 "use client";
 
-import React from "react";
+import React, { memo, useMemo } from "react";
 import { motion } from "framer-motion";
 
-const Particle = ({ idx }: { idx: number }) => {
+interface ParticleProps {
+  idx: number;
+}
+
+const Particle = memo(({ idx }: ParticleProps) => {
+  // Use deterministic values based on index instead of Math.random()
+  const styles = useMemo(
+    () => ({
+      left: `${(idx * 17 + 5) % 100}%`,
+      top: `${(idx * 23 + 10) % 100}%`,
+    }),
+    [idx]
+  );
+
+  const animation = useMemo(
+    () => ({
+      scale: [0, 1, 0],
+      opacity: [0, 0.6, 0],
+    }),
+    []
+  );
+
+  const transition = useMemo(
+    () => ({
+      duration: 3 + (idx % 3),
+      repeat: Infinity,
+      delay: idx * 0.5,
+      ease: "easeInOut" as const,
+    }),
+    [idx]
+  );
+
   return (
     <motion.div
-      key={idx}
-      className="absolute bg-cyan-400/20 w-2 h-2 rounded-full"
-      style={{
-        left: `${Math.random() * 100}%`,
-        top: `${Math.random() * 100}%`,
-      }}
-      animate={{
-        scale: [0, 1, 0],
-        opacity: [0, 1, 0],
-        x: [0, (Math.random() - 0.5) * 100],
-        y: [0, (Math.random() - 0.5) * 100],
-      }}
-      transition={{
-        duration: 2 + Math.random() * 5,
-        repeat: Infinity,
-        delay: Math.random() * 5,
-      }}
+      className="absolute bg-cyan-400/20 w-2 h-2 rounded-full will-change-transform"
+      style={styles}
+      animate={animation}
+      transition={transition}
     />
   );
-};
+});
+
+Particle.displayName = "Particle";
 
 export default Particle;
