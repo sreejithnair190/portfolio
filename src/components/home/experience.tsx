@@ -8,7 +8,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, type Variants } from "framer-motion";
 import { Calendar, Briefcase } from "lucide-react";
 import { useRef } from "react";
 import { cn } from "@/lib/utils";
@@ -24,7 +24,7 @@ const gridPatternStyle = `
     }
   `;
 
-const cardVariants = {
+const cardVariants: Variants = {
   hidden: { opacity: 0, y: 40, scale: 0.95 },
   visible: {
     opacity: 1,
@@ -39,7 +39,7 @@ const cardVariants = {
   },
 };
 
-const listItemVariants = {
+const listItemVariants: Variants = {
   hidden: { opacity: 0, x: -30 },
   visible: (i: number) => ({
     opacity: 1,
@@ -52,7 +52,7 @@ const listItemVariants = {
   }),
 };
 
-const techBadgeVariants = {
+const techBadgeVariants: Variants = {
   hidden: { opacity: 0, scale: 0 },
   visible: (i: number) => ({
     opacity: 1,
@@ -160,7 +160,7 @@ export default function Experience() {
                       ease: [0.22, 1, 0.36, 1],
                     },
                   },
-                }}
+                } as Variants}
               >
                 <motion.div
                   variants={cardVariants}

@@ -47,9 +47,24 @@ const ContactForm = () => {
   };
 
   const formFields = [
-    { id: "name", label: "Name", type: "text" },
-    { id: "email", label: "Email", type: "email" },
-    { id: "message", label: "Message", type: "textarea" },
+    {
+      id: "name",
+      label: "Name",
+      type: "text",
+      placeholder: "e.g. Jane Doe",
+    },
+    {
+      id: "email",
+      label: "Email",
+      type: "email",
+      placeholder: "you@company.com",
+    },
+    {
+      id: "message",
+      label: "Message",
+      type: "textarea",
+      placeholder: "Tell me a bit about your project or what you'd like to discuss...",
+    },
   ];
 
   return (
@@ -68,22 +83,24 @@ const ContactForm = () => {
               name={field.id as keyof FormValues}
               render={({ field: fieldProps }) => (
                 <FormItem>
-                  <FormLabel className="text-sm font-medium text-cyan-300">
+                  <FormLabel className="text-sm font-medium text-foreground/80">
                     {field.label}
                   </FormLabel>
-                  <motion.div whileHover={{ scale: 1.01 }} whileFocus={{ scale: 1.02 }}>
+                  <motion.div whileHover={{ scale: 1.01 }}>
                     <FormControl>
                       {field.type === "textarea" ? (
                         <Textarea
                           {...fieldProps}
                           rows={4}
-                          className="border-cyan-100/20 focus:border-cyan-300 resize-none bg-background/5"
+                          placeholder={field.placeholder}
+                          className="border-cyan-500/30 focus-visible:border-cyan-400 focus-visible:ring-cyan-400/20 resize-none bg-background/40 placeholder:text-muted-foreground/60"
                         />
                       ) : (
                         <Input
                           {...fieldProps}
                           type={field.type}
-                          className="border-cyan-100/20 focus:border-cyan-300 bg-background/5"
+                          placeholder={field.placeholder}
+                          className="border-cyan-500/30 focus-visible:border-cyan-400 focus-visible:ring-cyan-400/20 bg-background/40 placeholder:text-muted-foreground/60"
                         />
                       )}
                     </FormControl>

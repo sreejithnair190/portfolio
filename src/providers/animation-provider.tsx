@@ -49,10 +49,9 @@ export function AnimationProvider({ children }: { children: React.ReactNode }) {
             <LoadingAnimation duration={LOADING_DURATION} />
           </motion.div>
         ) : (
-          <motion.div 
+          <motion.div
             key="content"
-            className="will-change-transform"
-            initial={{ opacity: 0 }} 
+            initial={{ opacity: 0 }}
             animate={{ 
               opacity: 1,
               transition: { 
