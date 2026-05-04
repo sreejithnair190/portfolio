@@ -1,7 +1,7 @@
 "use client";
 
 import React, { memo, useMemo } from "react";
-import { motion } from "framer-motion";
+import { motion, type Transition } from "framer-motion";
 
 interface FloatingIconProps {
   idx: number;
@@ -19,7 +19,7 @@ const FloatingIcon = memo(({ idx, icon, className }: FloatingIconProps) => {
   );
 
   // Memoize transition configuration with deterministic duration based on index
-  const transition = useMemo(
+  const transition = useMemo<Transition>(
     () => ({
       duration: 4,
       repeat: Infinity,
