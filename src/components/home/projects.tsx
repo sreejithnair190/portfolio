@@ -14,37 +14,28 @@ type Project = {
   description: string
   technologies: string[]
   imageUrl: string
-  demoUrl: string
+  demoUrl?: string
   githubUrl: string
 }
 
 const projects: Project[] = [
   {
-    title: "E-Commerce Platform",
+    title: "Hortus API",
     description:
-      "A full-featured e-commerce platform with product listings, shopping cart, user authentication, and payment processing.",
-    technologies: ["React", "Next.js", "Node.js", "MongoDB", "Stripe"],
+      "A production-grade REST API for a plant e-commerce platform built with Spring Boot and PostgreSQL. Features JWT and Spring Security with separate access and refresh token flows, Flyway migrations, Redis caching for high-frequency endpoints, RabbitMQ for async event processing, and AWS S3 for product image uploads. Containerized with Docker Compose.",
+    technologies: [
+      "Spring Boot",
+      "PostgreSQL",
+      "JWT",
+      "Spring Security",
+      "Flyway",
+      "Redis",
+      "RabbitMQ",
+      "AWS S3",
+      "Docker Compose",
+    ],
     imageUrl: "/placeholder.svg?height=400&width=600",
-    demoUrl: "https://example.com/demo1",
-    githubUrl: "https://github.com/johndoe/ecommerce",
-  },
-  {
-    title: "Task Management App",
-    description:
-      "A collaborative task management application with real-time updates, drag-and-drop interface, and team collaboration features.",
-    technologies: ["React", "TypeScript", "Firebase", "Tailwind CSS"],
-    imageUrl: "/placeholder.svg?height=400&width=600",
-    demoUrl: "https://example.com/demo2",
-    githubUrl: "https://github.com/johndoe/task-manager",
-  },
-  {
-    title: "Weather Dashboard",
-    description:
-      "A weather dashboard that displays current conditions and forecasts for multiple locations with interactive maps and charts.",
-    technologies: ["JavaScript", "Chart.js", "Weather API", "Mapbox"],
-    imageUrl: "/placeholder.svg?height=400&width=600",
-    demoUrl: "https://example.com/demo3",
-    githubUrl: "https://github.com/johndoe/weather-app",
+    githubUrl: "https://github.com/sreejithnair190/hortus-backend",
   },
 ]
 
@@ -97,19 +88,21 @@ export default function Projects() {
                         </Link>
                       </motion.div>
                     </Button>
-                    <Button asChild size="sm">
-                      <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                        <Link
-                          href={project.demoUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex items-center"
-                        >
-                          <ExternalLink className="mr-2 h-4 w-4" />
-                          Live Demo
-                        </Link>
-                      </motion.div>
-                    </Button>
+                    {project.demoUrl && (
+                      <Button asChild size="sm">
+                        <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                          <Link
+                            href={project.demoUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center"
+                          >
+                            <ExternalLink className="mr-2 h-4 w-4" />
+                            Live Demo
+                          </Link>
+                        </motion.div>
+                      </Button>
+                    )}
                   </CardFooter>
                 </Card>
               </motion.div>

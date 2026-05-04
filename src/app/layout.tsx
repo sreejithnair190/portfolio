@@ -14,16 +14,16 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Sreejith Nair | Full-Stack Developer",
-  description: "Professional portfolio of Sreejith Nair, a full-stack developer specializing in modern web development. Explore projects, skills, and development expertise.",
+  title: "Sreejith Nair | Senior Software Engineer",
+  description: "Professional portfolio of Sreejith Nair, a Senior Software Engineer with 3.5+ years of experience building dynamic web applications across Java, PHP, and JavaScript. Explore projects, skills, and development expertise.",
   keywords: root_keywords,
   authors: [{ name: "Sreejith Nair" }],
   robots: "index, follow",
   openGraph: {
     type: "website",
     url: "https://sreejithnair.me",
-    title: "Sreejith Nair | Full-Stack Developer",
-    description: "Professional portfolio showcasing full-stack development projects",
+    title: "Sreejith Nair | Senior Software Engineer",
+    description: "Professional portfolio showcasing full-stack development projects across Java, PHP, and JavaScript",
     images: [{
       url: "https://sreejithnair.me/og-image.jpg",
       width: 1200,
