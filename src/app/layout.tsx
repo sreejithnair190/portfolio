@@ -1,60 +1,48 @@
-import type React from "react";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
+import "./studio.css";
 import { ThemeProvider } from "@/providers/theme-provider";
-import { AnimationProvider } from "@/providers/animation-provider";
-import ScrollTracker from "@/components/scroll-tracker";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
-import SmoothScrollProvider from "@/providers/smooth-scroll-provider";
 import { root_keywords } from "@/utils/keywords";
+import { EXPERIENCE } from "@/utils/experience";
 
-const inter = Inter({ subsets: ["latin"] });
+import { siteUrl } from "@/utils/constants";
 
 export const metadata: Metadata = {
-  title: "Sreejith Nair | Full-Stack Developer",
-  description: "Professional portfolio of Sreejith Nair, a full-stack developer specializing in modern web development. Explore projects, skills, and development expertise.",
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: `Sreejith Nair | ${EXPERIENCE[0].title}`,
+    template: "%s | Sreejith Nair",
+  },
+  description:
+    "Explore Sreejith Nair’s work on hotel bookings, event ticketing, and commerce APIs as a senior software engineer in Mumbai.",
   keywords: root_keywords,
   authors: [{ name: "Sreejith Nair" }],
-  robots: "index, follow",
   openGraph: {
     type: "website",
-    url: "https://sreejithnair.me",
-    title: "Sreejith Nair | Full-Stack Developer",
-    description: "Professional portfolio showcasing full-stack development projects",
-    images: [{
-      url: "https://sreejithnair.me/og-image.jpg",
-      width: 1200,
-      height: 630,
-      alt: "Sreejith Nair Portfolio",
-    }]
-  }
+    siteName: "Sreejith Nair",
+    images: ["/studio/terminal.webp"],
+  },
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={inter.className}>
+      <body>
         <ThemeProvider
           attribute="class"
-          defaultTheme="dark"
+          defaultTheme="light"
           disableTransitionOnChange
         >
-          <AnimationProvider>
-            <SmoothScrollProvider>
-              <Navbar />
-              <ScrollTracker />
-              <main className="flex-1 container mx-auto px-4 overflow-x-hidden">
-                {children}
-              </main>
-              <Footer />
-            </SmoothScrollProvider>
-          </AnimationProvider>
+          <a href="#main" className="skip-link">
+            Skip to content
+          </a>
+          <Navbar />
+          <main id="main">{children}</main>
+          <Footer />
         </ThemeProvider>
       </body>
     </html>

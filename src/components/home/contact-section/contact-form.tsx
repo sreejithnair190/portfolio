@@ -1,130 +1,69 @@
 "use client";
-
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Send } from "lucide-react";
-import { motion } from "framer-motion";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import { zodResolver } from "@hookform/resolvers/zod";  
-import { useEnquiryStore } from "@/stores/enquiryStore";
-import { useForm } from "react-hook-form";
-import { enquirySchema } from "@/lib/zod";
-import { z } from "zod";
-import ContactMessage from "./contact-message";
 import { useEffect } from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Send } from "lucide-react";
+import type { z } from "zod";
+import { useEnquiryStore } from "@/stores/enquiryStore";
+import { enquirySchema } from "@/lib/zod";
 
-const ContactForm = () => {
-  const { isSubmitting, submitSuccess, submitEnquiry } = useEnquiryStore();
-  
-  type FormValues = z.infer<typeof enquirySchema>;
-  
-  // Initialize react-hook-form
-  const form = useForm<FormValues>({
+type Values = z.infer<typeof enquirySchema>;
+export default function ContactForm() {
+  const { isSubmitting, submitSuccess, error, submitEnquiry } =
+    useEnquiryStore();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<Values>({
     resolver: zodResolver(enquirySchema),
-    defaultValues: {
-      name: "",
-      email: "",
-      message: "",
-    },
+    defaultValues: { name: "", email: "", message: "" },
   });
-
   useEffect(() => {
-    if (submitSuccess) {
-      form.reset();
-    }
-  }, [submitSuccess, form]);
-
-  const onSubmit = async (data: FormValues) => {
-    await submitEnquiry(data);
-  };
-
-  const formFields = [
-    { id: "name", label: "Name", type: "text" },
-    { id: "email", label: "Email", type: "email" },
-    { id: "message", label: "Message", type: "textarea" },
-  ];
-
+    if (submitSuccess) reset();
+  }, [submitSuccess, reset]);
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-        {formFields.map((field, index) => (
-          <motion.div
-            key={field.id}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.1 + 0.8 }}
-            className="space-y-2"
-          >
-            <FormField
-              control={form.control}
-              name={field.id as keyof FormValues}
-              render={({ field: fieldProps }) => (
-                <FormItem>
-                  <FormLabel className="text-sm font-medium text-cyan-300">
-                    {field.label}
-                  </FormLabel>
-                  <motion.div whileHover={{ scale: 1.01 }} whileFocus={{ scale: 1.02 }}>
-                    <FormControl>
-                      {field.type === "textarea" ? (
-                        <Textarea
-                          {...fieldProps}
-                          rows={4}
-                          className="border-cyan-100/20 focus:border-cyan-300 resize-none bg-background/5"
-                        />
-                      ) : (
-                        <Input
-                          {...fieldProps}
-                          type={field.type}
-                          className="border-cyan-100/20 focus:border-cyan-300 bg-background/5"
-                        />
-                      )}
-                    </FormControl>
-                  </motion.div>
-                  <FormMessage />
-                </FormItem>
-              )}
+    <form
+      noValidate
+      className="contact-form"
+      onSubmit={handleSubmit(submitEnquiry)}
+    >
+      <div className="field-row">
+        {(["name", "email"] as const).map((name) => (
+          <div key={name}>
+            <label htmlFor={name}>
+              {name === "name" ? "Your name" : "Email address"}
+            </label>
+            <input
+              id={name}
+              type={name === "email" ? "email" : "text"}
+              autoComplete={name}
+              required
+              aria-invalid={!!errors[name]}
+              aria-describedby={errors[name] ? name + "-error" : undefined}
+              {...register(name)}
             />
-          </motion.div>
-        ))}
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.1 }}
-        >
-          <Button
-            type="submit"
-            className="w-full gap-2 bg-gradient-to-r from-cyan-500 to-cyan-600 hover:from-cyan-400 hover:to-cyan-500 transition-all"
-            disabled={isSubmitting}
-          >
-            {isSubmitting ? (
-              <>Sending...</>
-            ) : (
-              <>
-                Send Message
-                <motion.span
-                  animate={isSubmitting ? {} : { x: [0, 2, 0] }}
-                  transition={{ repeat: Infinity, duration: 1.5 }}
-                >
-                  <Send className="h-4 w-4" />
-                </motion.span>
-              </>
+            {errors[name] && (
+              <p className="field-error" id={name + "-error"}>
+                {errors[name]?.message}
+              </p>
             )}
-          </Button>
-        </motion.div>
-
-        <ContactMessage />
-      </form>
-    </Form>
+          </div>
+        ))}
+      </div>
+      <div>
+        <label htmlFor="message">Message</label>
+        <textarea id="message" rows={4} {...register("message")} />
+      </div>
+      <button disabled={isSubmitting} className="button primary" type="submit">
+        <Send size={16} />
+        {isSubmitting ? "Sending…" : "Send message"}
+      </button>
+      <div role="status">
+        {submitSuccess && "Message sent. Thanks for getting in touch!"}
+        {error && <p className="form-error">{error}</p>}
+      </div>
+    </form>
   );
-};
-
-export default ContactForm;
+}

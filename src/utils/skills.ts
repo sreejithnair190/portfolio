@@ -2,7 +2,7 @@ import {
   Code,
   Server,
   Database,
-  // Terminal
+  Network,
 } from "lucide-react";
 
 export const SKILLS = [
@@ -23,29 +23,20 @@ export const SKILLS = [
   },
   {
     name: "Back-end",
-    skills: ["Node.js", "Express.js", "Springboot", "Laravel", "REST APIs"],
+    skills: ["Java", "Spring Boot", "PHP", "Laravel", "Node.js", "Express.js", "REST APIs"],
     icon: Server,
     bgGradient: "from-cyan-500/5 via-cyan-400/5 to-transparent",
   },
   {
-    name: "Databases",
-    skills: ["PostgreSQL", "MongoDB", "MySQL", "Redis"],
+    name: "Databases & persistence",
+    skills: ["PostgreSQL", "MySQL", "MongoDB", "Redis", "Flyway", "Hibernate", "Eloquent", "Prisma"],
     icon: Database,
     bgGradient: "from-cyan-500/5 via-cyan-400/5 to-transparent",
   },
-  //   {
-  //     name: "DevOps & Tools",
-  //     skills: [
-  //       "Git",
-  //       "GitHub",
-  //       "Docker",
-  //       "CI/CD",
-  //       "AWS",
-  //       "Vercel",
-  //       "Jest",
-  //       "Cypress",
-  //     ],
-  //     icon: Terminal,
-  //     bgGradient: "from-cyan-500/5 via-cyan-400/5 to-transparent",
-  //   },
+  {
+    name: "Infrastructure & tools",
+    skills: ["RabbitMQ", "Docker Compose", "Amazon S3", "Git", "Postman"],
+    icon: Network,
+    bgGradient: "from-cyan-500/5 via-cyan-400/5 to-transparent",
+  },
 ];

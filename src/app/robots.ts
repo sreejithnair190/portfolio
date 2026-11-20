@@ -1,3 +1,4 @@
+import { siteUrl } from '@/utils/constants'
 import type { MetadataRoute } from 'next'
  
 export default function robots(): MetadataRoute.Robots {
@@ -6,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: '*',
       allow: '/',
     },
-    sitemap: 'https://sreejithnair.me/sitemap.xml',
+    sitemap: siteUrl + "/sitemap.xml",
   }
 }

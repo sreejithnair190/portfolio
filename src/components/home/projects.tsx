@@ -1,123 +1,123 @@
-"use client"
+import Image from "next/image";
+import { FiGithub as Github } from "react-icons/fi";
+import { github_url } from "@/utils/constants";
 
-import Image from "next/image"
-import Link from "next/link"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { ExternalLink, Github } from "lucide-react"
-import ScrollReveal from "@/components/ui/scroll-reveal"
-import { motion } from "framer-motion"
-
-type Project = {
-  title: string
-  description: string
-  technologies: string[]
-  imageUrl: string
-  demoUrl: string
-  githubUrl: string
-}
-
-const projects: Project[] = [
+const projects = [
   {
-    title: "E-Commerce Platform",
+    title: "4Rooms",
+    website: "https://4rooms.services/4rooms-tech/en",
+    category: "Hospitality / ThirstyFish",
+    image: "/studio/4rooms-hotel.webp",
+    className: "rooms-project",
+    stack: "Next.js · Laravel · PostgreSQL · Stripe",
     description:
-      "A full-featured e-commerce platform with product listings, shopping cart, user authentication, and payment processing.",
-    technologies: ["React", "Next.js", "Node.js", "MongoDB", "Stripe"],
-    imageUrl: "/placeholder.svg?height=400&width=600",
-    demoUrl: "https://example.com/demo1",
-    githubUrl: "https://github.com/johndoe/ecommerce",
+      "I built the booking engine that connects a guest’s reservation to the tools hotel staff use behind the desk.",
   },
   {
-    title: "Task Management App",
+    title: "ResourceQueue",
+    website: "https://www.linkedin.com/company/resourcequeue/",
+    linkLabel: "ResourceQueue on LinkedIn",
+    category: "Developer hiring / ZedexInfo",
+    image: "/studio/resourcequeue.webp",
+    className: "resourcequeue-project",
+    stack: "Organization management · Developer search · Zoom API",
     description:
-      "A collaborative task management application with real-time updates, drag-and-drop interface, and team collaboration features.",
-    technologies: ["React", "TypeScript", "Firebase", "Tailwind CSS"],
-    imageUrl: "/placeholder.svg?height=400&width=600",
-    demoUrl: "https://example.com/demo2",
-    githubUrl: "https://github.com/johndoe/task-manager",
+      "I built tools for companies to manage their teams, find available developers, and schedule interviews through Zoom.",
   },
   {
-    title: "Weather Dashboard",
+    title: "ABS Group",
+    website: "https://absgroupglobal.com/",
+    category: "Industrial engineering / ThirstyFish",
+    image: "/studio/abs-group.webp",
+    className: "abs-project",
+    stack: "Laravel · Regional domains",
     description:
-      "A weather dashboard that displays current conditions and forecasts for multiple locations with interactive maps and charts.",
-    technologies: ["JavaScript", "Chart.js", "Weather API", "Mapbox"],
-    imageUrl: "/placeholder.svg?height=400&width=600",
-    demoUrl: "https://example.com/demo3",
-    githubUrl: "https://github.com/johndoe/weather-app",
+      "I built the routing that gives each region its own product catalog, news, and job listings across the ABS Group sites.",
   },
-]
+  {
+    title: "Arch Education",
+    category: "Education / ThirstyFish",
+    image: "/studio/arch-education.webp",
+    className: "arch-project",
+    stack: "Laravel · Mock-test scheduling",
+    description:
+      "I built the booking flow students use to register for mock tests and the scheduling tools staff use to manage available slots.",
+  },
+  {
+    title: "BiryaniBowl",
+    category: "Commerce / ThirstyFish",
+    image: "/studio/biryani.webp",
+    className: "biryani-project",
+    stack: "Laravel · MySQL · Stripe",
+    description:
+      "An ordering platform where customers choose a pickup slot and the kitchen can plan for the rush.",
+  },
+  {
+    title: "Hortus API",
+    category: "Backend engineering / Personal",
+    image: "/studio/hortus.webp",
+    className: "hortus-project",
+    stack: "Spring Boot · PostgreSQL · Redis · RabbitMQ",
+    description:
+      "A plant shop API with a cached product catalog, image storage, and a queue for background events.",
+    source: `${github_url}/hortus-backend`,
+  },
+];
 
 export default function Projects() {
   return (
-    <section id="projects" className="py-16 md:py-24">
-      <div className="container px-4 md:px-6">
-        <ScrollReveal width="100%" className="text-center">
-          <h2 className="text-3xl font-bold tracking-tighter md:text-4xl/tight mb-8">Featured Projects</h2>
-        </ScrollReveal>
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {projects.map((project, index) => (
-            <ScrollReveal key={project.title} delay={index * 0.2} direction="up">
-              <motion.div whileHover={{ y: -10 }} transition={{ duration: 0.3 }}>
-                <Card className="flex flex-col h-full overflow-hidden">
-                  <div className="relative aspect-video overflow-hidden">
-                    <motion.div whileHover={{ scale: 1.05 }} transition={{ duration: 0.5 }}>
-                      <Image
-                        src={project.imageUrl || "/placeholder.svg"}
-                        alt={project.title}
-                        fill
-                        className="object-cover"
-                      />
-                    </motion.div>
-                  </div>
-                  <CardHeader>
-                    <CardTitle>{project.title}</CardTitle>
-                    <CardDescription>{project.description}</CardDescription>
-                  </CardHeader>
-                  <CardContent className="flex-grow">
-                    <div className="flex flex-wrap gap-2 mb-4">
-                      {project.technologies.map((tech) => (
-                        <motion.div key={tech} whileHover={{ scale: 1.1 }} transition={{ duration: 0.2 }}>
-                          <Badge variant="secondary">{tech}</Badge>
-                        </motion.div>
-                      ))}
-                    </div>
-                  </CardContent>
-                  <CardFooter className="flex justify-between">
-                    <Button asChild variant="outline" size="sm">
-                      <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                        <Link
-                          href={project.githubUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex items-center"
-                        >
-                          <Github className="mr-2 h-4 w-4" />
-                          Code
-                        </Link>
-                      </motion.div>
-                    </Button>
-                    <Button asChild size="sm">
-                      <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                        <Link
-                          href={project.demoUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex items-center"
-                        >
-                          <ExternalLink className="mr-2 h-4 w-4" />
-                          Live Demo
-                        </Link>
-                      </motion.div>
-                    </Button>
-                  </CardFooter>
-                </Card>
-              </motion.div>
-            </ScrollReveal>
+    <section id="projects" className="work-section">
+      <div className="shell">
+        <div className="section-heading work-heading">
+          <div>
+            <p className="eyebrow">
+              <span className="orange-line" />
+              Portfolio
+            </p>
+            <h2>
+              Selected <em>work.</em>
+            </h2>
+          </div>
+          <a target="_blank" rel="noopener noreferrer" href={github_url} className="plain-link">
+            <Github size={16} /> GitHub
+          </a>
+        </div>
+        <div className="project-deck">
+          {projects.map((project) => (
+            <article
+              className={`project-slide ${project.className}`}
+              key={project.title}
+            >
+              <div className="project-frame">
+                <div className="project-art">
+                  <Image
+                    src={project.image}
+                    alt=""
+                    fill
+                    sizes="(max-width: 760px) 100vw, 63vw"
+                  />
+                </div>
+                <div className="project-info">
+                  <p className="micro">{project.category}</p>
+                  <h3>{project.title}</h3>
+                  <p className="project-description">{project.description}</p>
+                  {project.website && (
+                    <a target="_blank" rel="noopener noreferrer" className="project-source" href={project.website}>
+                      {project.linkLabel ?? `Visit ${project.title}`}
+                    </a>
+                  )}
+                  {project.source && (
+                    <a target="_blank" rel="noopener noreferrer" className="project-source" href={project.source}>
+                      <Github size={15} /> View source
+                    </a>
+                  )}
+                  <p className="project-stack">{project.stack}</p>
+                </div>
+              </div>
+            </article>
           ))}
         </div>
       </div>
     </section>
-  )
+  );
 }
-

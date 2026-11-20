@@ -43,10 +43,10 @@ export default function ScrollTracker() {
               scale: 0
             }}
             animate={{
-              right: ['0%', `${Math.random() * 20}%`, '0%'],
+              right: ['0%', `${6 + i * 6}%`, '0%'],
               opacity: [0, 1, 0],
               scale: [0, 1, 0],
-              y: [-5, Math.random() * 10 - 5, 0]
+              y: [-5, i * 4 - 4, 0]
             }}
             transition={{
               duration: 1.5,
