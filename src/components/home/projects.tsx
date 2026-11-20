@@ -1,4 +1,5 @@
 import Image from "next/image";
+import type { CSSProperties } from "react";
 import { FiGithub as Github } from "react-icons/fi";
 import { github_url } from "@/utils/constants";
 
@@ -68,6 +69,7 @@ export default function Projects() {
   return (
     <section id="projects" className="work-section">
       <div className="shell">
+        <div className="work-heading-track">
         <div className="section-heading work-heading">
           <div>
             <p className="eyebrow">
@@ -82,11 +84,13 @@ export default function Projects() {
             <Github size={16} /> GitHub
           </a>
         </div>
+        </div>
         <div className="project-deck">
-          {projects.map((project) => (
+          {projects.map((project, index) => (
             <article
               className={`project-slide ${project.className}`}
               key={project.title}
+              style={{ "--stack-index": index } as CSSProperties}
             >
               <div className="project-frame">
                 <div className="project-art">

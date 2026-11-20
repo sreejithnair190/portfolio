@@ -417,15 +417,36 @@ html.lenis.lenis-smooth {
   transform: translate3d(0, var(--art-y), 0) scale(1.36);
 }
 @media (min-width: 900px) and (min-height: 740px) and (prefers-reduced-motion: no-preference) {
-  .studio-home[data-motion="on"] .project-frame {
-    position: sticky;
-    top: calc(var(--nav-height) + 24px);
+  .studio-home[data-motion="on"] .work-section {
+    padding-bottom: clamp(20px, 3vh, 36px);
   }
-  /* Each frame releases at its own slide boundary, before the next project enters. */
-  .studio-home[data-motion="on"] .project-slide::after {
-    content: "";
-    display: block;
-    height: 32svh;
+  .studio-home[data-motion="on"] .work-section > .shell {
+    position: relative;
+    --heading-pin: calc(var(--nav-height) + 12px);
+    --heading-gap: 18px;
+  }
+  .studio-home[data-motion="on"] .work-heading-track {
+    position: absolute;
+    inset: 0 0 calc(var(--stack-height) + var(--heading-gap));
+    z-index: 10;
+    pointer-events: none;
+  }
+  .studio-home[data-motion="on"] .work-heading {
+    position: sticky;
+    top: var(--heading-pin);
+    margin: 0;
+    pointer-events: auto;
+  }
+  .studio-home[data-motion="on"] .project-deck {
+    padding-top: calc(var(--work-heading-height) + var(--heading-gap));
+  }
+  .studio-home[data-motion="on"] .project-slide {
+    position: sticky;
+    top: calc(var(--heading-pin) + var(--work-heading-height) + var(--heading-gap) + var(--stack-index) * 7px);
+    z-index: var(--stack-index);
+  }
+  .studio-home[data-motion="on"] .project-frame {
+    transform: scale(calc(1 - var(--covered, 0) * 0.025));
   }
 }
 .project-art::after {

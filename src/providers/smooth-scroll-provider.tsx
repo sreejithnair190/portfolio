@@ -35,6 +35,9 @@ export default function SmoothScrollProvider({
       const bounds = slides.map((card) => card.getBoundingClientRect());
       slides.forEach((card, i) => {
         const { top, height } = bounds[i];
+        const next = bounds[i + 1];
+        const covered = next ? clamp((top + height - next.top) / height) : 0;
+        card.style.setProperty("--covered", covered.toFixed(3));
         // Art travels inside its frame for the entire time the card crosses the viewport.
         const entryTop = i === 0 ? titleTop : top;
         const progress = clamp((h - entryTop) / (h + height + top - entryTop));
@@ -82,12 +85,24 @@ export default function SmoothScrollProvider({
       entrances.forEach((el) => reveal!.observe(el));
       schedule();
     }
+    const shell = heading.closest<HTMLElement>(".shell")!;
+    function measureStack() {
+      shell.style.setProperty("--work-heading-height", heading.offsetHeight + "px");
+      const tallestCard = Math.max(...slides.map((slide) => slide.offsetHeight));
+      shell.style.setProperty("--stack-height", tallestCard + "px");
+      schedule();
+    }
+    const resize = new ResizeObserver(measureStack);
+    resize.observe(heading);
+    slides.forEach((slide) => resize.observe(slide));
+    measureStack();
     configure();
     reduced.addEventListener("change", configure);
     desktop.addEventListener("change", configure);
     window.addEventListener("scroll", schedule, { passive: true });
     window.addEventListener("resize", schedule);
     return () => {
+      resize.disconnect();
       lenis?.destroy();
       reveal?.disconnect();
       cancelAnimationFrame(frame);
