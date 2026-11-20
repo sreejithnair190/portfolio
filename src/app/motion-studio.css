@@ -438,15 +438,24 @@ html.lenis.lenis-smooth {
     pointer-events: auto;
   }
   .studio-home[data-motion="on"] .project-deck {
+    grid-auto-rows: 1fr;
     padding-top: calc(var(--work-heading-height) + var(--heading-gap));
+    margin-inline: clamp(22px, 3vw, 56px);
+    /* Room for the turned lower-left corners as the stack exits. */
+    margin-bottom: clamp(70px, 8vw, 132px);
   }
   .studio-home[data-motion="on"] .project-slide {
     position: sticky;
-    top: calc(var(--heading-pin) + var(--work-heading-height) + var(--heading-gap) + var(--stack-index) * 7px);
+    top: calc(var(--heading-pin) + var(--work-heading-height) + var(--heading-gap));
     z-index: var(--stack-index);
   }
   .studio-home[data-motion="on"] .project-frame {
-    transform: scale(calc(1 - var(--covered, 0) * 0.025));
+    height: 100%;
+    min-height: clamp(350px, 51svh, 620px);
+    transform-origin: 88% 86%;
+    transform: rotate(calc(var(--fan-depth, 0) * -1.35deg))
+      scale(calc(1 - var(--fan-depth, 0) * 0.008));
+    box-shadow: 0 2px 2px #10101830, 0 7px 16px -7px #10101870;
   }
 }
 .project-art::after {

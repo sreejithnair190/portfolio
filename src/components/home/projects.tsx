@@ -21,7 +21,7 @@ const projects = [
     category: "Developer hiring / ZedexInfo",
     image: "/studio/resourcequeue.webp",
     className: "resourcequeue-project",
-    stack: "Organization management · Developer search · Zoom API",
+    stack: "Spring Boot · Next.js · PostgreSQL · Zoom API",
     description:
       "I built tools for companies to manage their teams, find available developers, and schedule interviews through Zoom.",
   },
@@ -31,7 +31,7 @@ const projects = [
     category: "Industrial engineering / ThirstyFish",
     image: "/studio/abs-group.webp",
     className: "abs-project",
-    stack: "Laravel · Regional domains",
+    stack: "PHP · Laravel · MySQL · Stripe",
     description:
       "I built the routing that gives each region its own product catalog, news, and job listings across the ABS Group sites.",
   },
@@ -40,7 +40,7 @@ const projects = [
     category: "Education / ThirstyFish",
     image: "/studio/arch-education.webp",
     className: "arch-project",
-    stack: "Laravel · Mock-test scheduling",
+    stack: "Node.js · Next.js",
     description:
       "I built the booking flow students use to register for mock tests and the scheduling tools staff use to manage available slots.",
   },

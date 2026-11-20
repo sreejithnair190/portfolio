@@ -33,16 +33,20 @@ export default function SmoothScrollProvider({
       const entry = clamp((h - titleTop) / h);
       heading.style.setProperty("--title-offset", ((1 - entry) * 36).toFixed(2) + "px");
       const bounds = slides.map((card) => card.getBoundingClientRect());
-      slides.forEach((card, i) => {
+      // Each arriving card turns the layers beneath it around the same corner.
+      let depth = 0;
+      for (let i = slides.length - 1; i >= 0; i--) {
+        const card = slides[i];
         const { top, height } = bounds[i];
         const next = bounds[i + 1];
         const covered = next ? clamp((top + height - next.top) / height) : 0;
-        card.style.setProperty("--covered", covered.toFixed(3));
+        depth = (depth + 1) * covered;
+        card.style.setProperty("--fan-depth", depth.toFixed(3));
         // Art travels inside its frame for the entire time the card crosses the viewport.
         const entryTop = i === 0 ? titleTop : top;
         const progress = clamp((h - entryTop) / (h + height + top - entryTop));
         card.style.setProperty("--art-y", ((progress - 0.5) * 34).toFixed(2) + "%");
-      });
+      }
     }
     function schedule() {
       if (!frame && !reduced.matches) frame = requestAnimationFrame(paint);
