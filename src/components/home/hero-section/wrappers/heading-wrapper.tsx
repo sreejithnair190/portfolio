@@ -2,6 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
+import Balancer from "react-wrap-balancer";
 
 const HeadingWrapper = ({ children }: { children: React.ReactNode }) => {
   const itemVariants = {
@@ -14,7 +15,7 @@ const HeadingWrapper = ({ children }: { children: React.ReactNode }) => {
       className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tighter relative"
       variants={itemVariants}
     >
-      {children}
+      <Balancer>{children}</Balancer>
     </motion.h1>
   );
 };

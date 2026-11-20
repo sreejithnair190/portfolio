@@ -43,3 +43,4 @@ next-env.d.ts
 backup/
 .playwright-mcp/
 /.vscode
+/.kiro

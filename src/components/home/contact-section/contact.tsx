@@ -8,7 +8,9 @@ import {
 import { MoveRight } from "lucide-react";
 import Link from "next/link";
 import { CONTACT } from "@/utils/contact";
+import { email } from "@/utils/constants";
 import ContactForm from "./contact-form";
+import CopyButton from "./copy-button";
 import { SectionReveal } from "@/components/ui/section-reveal";
 import ContactCardContainerWrapper from "./wrappers/contact-card-container-wrapper";
 import ContactCardWrapper from "./wrappers/contact-card-wrapper";
@@ -62,8 +64,26 @@ export default function Contact() {
                         </p>
                       )}
                     </div>
+                    {item.title === "Email" && (
+                      <CopyButton value={email} label="Copy email address" />
+                    )}
                   </ContactCardWrapper>
                 ))}
+
+                <div className="mt-2 rounded-lg border border-cyan-500/30 bg-cyan-500/5 p-4 flex items-center gap-3">
+                  <span className="relative flex h-2.5 w-2.5 shrink-0">
+                    <span className="absolute inset-0 rounded-full bg-cyan-400 opacity-60 animate-ping" />
+                    <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-cyan-500" />
+                  </span>
+                  <div className="min-w-0">
+                    <p className="text-sm font-medium text-cyan-300">
+                      Available for opportunities
+                    </p>
+                    <p className="text-xs text-muted-foreground">
+                      Typically replies within 24 hours
+                    </p>
+                  </div>
+                </div>
               </CardContent>
             </Card>
           </ContactCardContainerWrapper>

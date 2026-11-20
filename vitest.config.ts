@@ -3,5 +3,5 @@ import path from "node:path";
 
 export default defineConfig({
   resolve: { alias: { "@": path.resolve(__dirname, "src") } },
-  test: { environment: "jsdom", include: ["test/**/*.test.{ts,tsx}"] },
+  test: { environment: "jsdom", setupFiles: ["./vitest.setup.ts"], include: ["test/**/*.test.{ts,tsx}"] },
 });

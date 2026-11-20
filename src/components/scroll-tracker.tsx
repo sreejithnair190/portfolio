@@ -1,24 +1,15 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { motion } from "framer-motion"
+import { useLenis } from "lenis/react"
 
 export default function ScrollTracker() {
   const [scrollProgress, setScrollProgress] = useState(0)
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const totalHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight
-      const scrollPosition = window.scrollY
-
-      if (totalHeight > 0) {
-        setScrollProgress((scrollPosition / totalHeight) * 100)
-      }
-    }
-
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
+  useLenis(({ progress }) => {
+    setScrollProgress(progress * 100)
+  })
 
   return (
     <div className="fixed top-0 left-0 right-0 h-1 z-[100] bg-cyan-900/20">
