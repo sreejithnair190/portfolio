@@ -2,8 +2,8 @@
 
 import type React from "react"
 
-import { useRef, useEffect, useState } from "react"
-import { motion, useInView, type Variant } from "framer-motion"
+import { useRef } from "react"
+import { motion, useInView, useReducedMotion, type Variant } from "framer-motion"
 
 type ScrollRevealProps = {
   children: React.ReactNode
@@ -28,26 +28,7 @@ export default function ScrollReveal({
 }: ScrollRevealProps) {
   const ref = useRef<HTMLDivElement>(null)
   const isInView = useInView(ref, { once, margin: "-100px 0px" })
-  const [hasAnimated, setHasAnimated] = useState(false)
-
-  useEffect(() => {
-    if (isInView && !hasAnimated) {
-      setHasAnimated(true)
-    }
-  }, [isInView, hasAnimated])
-
-  // Check for reduced motion preference
-  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false)
-
-  useEffect(() => {
-    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)")
-    setPrefersReducedMotion(mediaQuery.matches)
-
-    const handleChange = () => setPrefersReducedMotion(mediaQuery.matches)
-    mediaQuery.addEventListener("change", handleChange)
-
-    return () => mediaQuery.removeEventListener("change", handleChange)
-  }, [])
+  const prefersReducedMotion = useReducedMotion()
 
   // Define variants based on direction
   const getDirectionalVariants = () => {

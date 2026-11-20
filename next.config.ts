@@ -12,6 +12,7 @@ const nextConfig = {
   
   // Performance optimizations
   poweredByHeader: false,
+  devIndicators: false,
   compress: true,
   
   // Cache and performance

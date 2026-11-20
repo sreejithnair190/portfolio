@@ -18,11 +18,11 @@ export const CERTIFICATIONS = [
   {
     name: "Spring Boot 0 to 1 - Fundamentals",
     issuer: "Coding Shuttle",
-    date: "2025",
+    date: "Mar 2025",
     url: "/certifications/springboot-0-1.png",
   },
   {
-    name: "Node.Js, Express, MongoDB: The Complete Bootcamp",
+    name: "Node.js, Express, MongoDB: The Complete Bootcamp",
     issuer: "Udemy",
     date: "2023",
     url: "/certifications/node-express-mongodb.jpg",

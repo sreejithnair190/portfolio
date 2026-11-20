@@ -8,12 +8,12 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { motion, useScroll, useTransform, type Variants } from "framer-motion";
+import ScrollReveal from "@/components/ui/scroll-reveal";
+import { type Variants, motion, useScroll, useTransform } from "framer-motion";
 import { Calendar, Briefcase } from "lucide-react";
 import { useRef } from "react";
 import { cn } from "@/lib/utils";
 import { EXPERIENCE } from "@/utils/experience";
-import { SectionReveal } from "@/components/ui/section-reveal";
 
 const gridPatternStyle = `
     .bg-grid-pattern {
@@ -85,10 +85,25 @@ export default function Experience() {
       <style jsx>{gridPatternStyle}</style>
       <div className="absolute inset-0 bg-grid-pattern opacity-5 pointer-events-none"></div>
       <div className="container px-4 md:px-6 relative">
-        <SectionReveal
-          title="Work Experience"
-          subtitle="My professional journey and the skills I've developed along the way"
-        />
+        <ScrollReveal width="100%" className="text-center mb-16">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="text-3xl font-bold tracking-tighter md:text-5xl mb-4 bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 bg-clip-text text-transparent"
+          >
+            Work Experience
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.6 }}
+            className="text-muted-foreground text-lg max-w-2xl mx-auto"
+          >
+            My professional journey and the skills I&apos;ve developed along the
+            way
+          </motion.p>
+        </ScrollReveal>
 
         <div className="relative">
           {/* Animated SVG Timeline */}
@@ -160,7 +175,7 @@ export default function Experience() {
                       ease: [0.22, 1, 0.36, 1],
                     },
                   },
-                } as Variants}
+                }}
               >
                 <motion.div
                   variants={cardVariants}
