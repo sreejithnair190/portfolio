@@ -3,7 +3,7 @@ import { Layers3 } from "lucide-react";
 import { series } from "@/lib/journal";
 export const metadata = {
   title: "Journal",
-  description: "Build notes and development series from Sreejith Nair.",
+  description: "I write about how I build things for the web, from shaping the 3D computer on my homepage to making it move as you scroll.",
 };
 
 export default function Journal() {

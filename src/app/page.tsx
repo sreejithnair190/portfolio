@@ -3,11 +3,11 @@ import Hero from "@/components/home/hero-section/hero";
 import Projects from "@/components/home/projects";
 import Image from "next/image";
 import Link from "next/link";
-import { BookOpen, Download, Mail, Layers3 } from "lucide-react";
+import { BookOpen, BriefcaseBusiness, Code2, Download, GraduationCap, Mail, Layers3 } from "lucide-react";
 import { EXPERIENCE } from "@/utils/experience";
 import { SKILLS } from "@/utils/skills";
 import { ACADEMICS, CERTIFICATIONS } from "@/utils/education";
-import { email, resumeUrl, siteUrl, github_url, linkedIn_url } from "@/utils/constants";
+import { email, resumeUrl, siteUrl, github_url, linkedIn_url, portfolioDescription as description } from "@/utils/constants";
 import ContactForm from "@/components/home/contact-section/contact-form";
 import { series } from "@/lib/journal";
 import { journalEnabled } from "@/lib/features";
@@ -15,7 +15,6 @@ import SmoothScrollProvider from "@/providers/smooth-scroll-provider";
 import "./motion-studio.css";
 
 const title = "Sreejith Nair | Full Stack Software Engineer in Mumbai";
-const description = "Sreejith Nair is a full stack software engineer in Mumbai with 4+ years of experience. Explore his booking systems, web applications, and REST APIs.";
 
 export const metadata: Metadata = {
   title: { absolute: title },
@@ -65,17 +64,20 @@ export default function Home() {
               Behind the
               <br /> <em>screen.</em>
             </h2>
-            <div className="portrait-line">
-              <Image
-                src="/profile.webp"
-                alt="Sreejith Nair"
-                width={70}
-                height={70}
-              />
-              <div>
-                <strong>Sreejith Nair</strong>
-                <p>Mumbai, India</p>
-              </div>
+            <div className="portrait-mount" data-surface>
+              <figure className="about-portrait">
+                <Image
+                  src="/profile.webp"
+                  alt="Sreejith Nair"
+                  width={360}
+                  height={480}
+                  sizes="(max-width: 760px) 96px, 212px"
+                />
+                <figcaption>
+                  <strong>Sreejith Nair</strong>
+                  <p>Mumbai, India</p>
+                </figcaption>
+              </figure>
             </div>
             <a className="plain-link" href={resumeUrl} download>
               <Download size={16} /> Download résumé
@@ -93,7 +95,7 @@ export default function Home() {
               to manage reservations and shifts.
             </p>
             <details id="experience" open>
-              <summary>Experience</summary>
+              <summary><BriefcaseBusiness size={19} aria-hidden="true" />Experience</summary>
               {EXPERIENCE.map((job) => (
                 <details className="job-entry" key={job.company}>
                   <summary className="detail-row">
@@ -113,7 +115,7 @@ export default function Home() {
               ))}
             </details>
             <details id="skills">
-              <summary>Technical skills</summary>
+              <summary><Code2 size={19} aria-hidden="true" />Technical skills</summary>
               {SKILLS.map((group) => (
                 <div className="detail-row stacked" key={group.name}>
                   <strong>{group.name}</strong>
@@ -122,7 +124,7 @@ export default function Home() {
               ))}
             </details>
             <details id="education">
-              <summary>Education &amp; certifications</summary>
+              <summary><GraduationCap size={19} aria-hidden="true" />Education &amp; certifications</summary>
               {ACADEMICS.map((item) => (
                 <div className="detail-row stacked" key={item.degree}>
                   <strong>{item.degree}</strong>
@@ -183,7 +185,7 @@ export default function Home() {
       )}
       <section className="contact-section" id="contact">
         <div className="shell contact-layout">
-          <div data-enter>
+          <div className="contact-copy" data-enter data-surface>
             <p className="eyebrow">
               <span className="orange-line" />
               Contact
@@ -196,6 +198,9 @@ export default function Home() {
               <Mail size={17} />
               {email}
             </a>
+            <div className="contact-flight" aria-hidden="true">
+              <Image src="/studio/paper-plane.webp" alt="" width={640} height={328} sizes="(max-width: 760px) 110px, 340px" />
+            </div>
           </div>
           <ContactForm />
         </div>

@@ -92,6 +92,7 @@ export default function Navbar() {
           <Link
             className="contact-button"
             href="/#contact"
+            aria-current={pathname === "/" && section === "contact" ? "location" : undefined}
             onClick={() => setOpen(false)}
           >
             Let&apos;s talk <MessageCircle size={15} />

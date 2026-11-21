@@ -80,7 +80,7 @@ export interface ItemListJsonLd {
  */
 export function generatePostSocialMetaTags(post: BlogPost, imageUrl: string): SocialMetaTags {
   const title = `${post.title} | Sreejith Nair`
-  const description = post.excerpt || `Read ${post.title} by ${post.author}`
+  const description = post.excerpt || `From my journal: ${post.title}.`
   const url = `${siteUrl}/blog/${post.slug.current}`
 
   return {
@@ -109,7 +109,7 @@ export function generatePostSocialMetaTags(post: BlogPost, imageUrl: string): So
  */
 export function generateSeriesSocialMetaTags(series: BlogSeries, imageUrl: string): SocialMetaTags {
   const title = `${series.title} | Blog Series | Sreejith Nair`
-  const description = series.description || `Read the ${series.title} blog series by Sreejith Nair. ${series.posts.length} posts, ${series.totalReadingTime} min total reading time.`
+  const description = series.description || `Explore my series “${series.title}” in ${series.posts.length} posts. About ${series.totalReadingTime} minutes to read.`
   const url = `${siteUrl}/blog/series/${series.slug.current}`
 
   return {
@@ -143,7 +143,7 @@ export function generateArticleJsonLd(post: BlogPost, imageUrl: string): Article
     '@context': 'https://schema.org',
     '@type': 'Article',
     headline: post.title,
-    description: post.excerpt || `Read ${post.title} by ${post.author}`,
+    description: post.excerpt || `From my journal: ${post.title}.`,
     image: imageUrl,
     datePublished: post.publishedAt,
     dateModified: post.publishedAt,
@@ -171,7 +171,7 @@ export function generateItemListJsonLd(series: BlogSeries): ItemListJsonLd {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
     name: series.title,
-    description: series.description || `${series.title} blog series`,
+    description: series.description || `My series on ${series.title}.`,
     numberOfItems: series.posts.length,
     itemListElement: series.posts.map((post, index) => ({
       '@type': 'ListItem',

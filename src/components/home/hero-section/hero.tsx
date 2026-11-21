@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { Download, Mouse } from "lucide-react";
+import Image from "next/image";
+import { ArrowDownRight, Download, Mouse } from "lucide-react";
 import { FiGithub as Github, FiLinkedin as Linkedin } from "react-icons/fi";
 import { github_url, linkedIn_url, resumeUrl } from "@/utils/constants";
 import { EXPERIENCE } from "@/utils/experience";
@@ -10,20 +11,17 @@ export default function Hero() {
     <section id="home" className="hero-section">
       <div className="hero-stage">
         <div className="stage-atmosphere" aria-hidden="true" />
-        <div className="stage-floor" aria-hidden="true" />
-        <div className="stage-orbits" aria-hidden="true">
-          <i />
-          <i />
-          <i />
-        </div>
         <div className="shell stage-inner">
+          <div className="stage-lens" aria-hidden="true">
+            <Image src="/studio/optical-glass.webp" alt="" width={1440} height={810} sizes="(max-width: 760px) 160vw, 100vw" loading="eager" />
+          </div>
           <div className="stage-copy hero-intro">
             <p className="eyebrow">
               <span className="orange-line" />
               {EXPERIENCE[0].title}
             </p>
             <h1>
-              Sreejith{" "}
+              <span className="given-name">Sreejith</span>{" "}
               <em>
                 Nair<span>.</span>
               </em>
@@ -33,7 +31,7 @@ export default function Hero() {
             </p>
             <div className="hero-actions">
               <Link href="#projects" className="button primary">
-                Explore my work
+                Explore my work <ArrowDownRight aria-hidden="true" size={17} />
               </Link>
               <a href={resumeUrl} download className="button secondary">
                 <Download size={15} /> Résumé

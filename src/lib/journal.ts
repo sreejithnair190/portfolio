@@ -15,7 +15,7 @@ const entries: Entry[] = [
   {
     title: "Giving the terminal a silhouette",
     excerpt:
-      "How a few rounded shapes became the little orange computer on the homepage.",
+      "I started with a few rounded shapes. Here’s how I turned them into the little orange computer on my homepage.",
     sections: [
       {
         heading: "Start with the shadow",
@@ -42,7 +42,7 @@ const entries: Entry[] = [
   {
     title: "Making an object feel good to turn",
     excerpt:
-      "How the camera, floating hardware, and keyboard controls share a scroll-driven scene.",
+      "I wanted the computer on my homepage to feel good to turn. Here’s how I made the camera and hardware move together as you scroll.",
     sections: [
       {
         heading: "Choose the first view",
@@ -71,7 +71,7 @@ const entries: Entry[] = [
 const title = "Building the studio";
 const slug = "building-the-studio";
 const description =
-  "A two-part build log on modeling a retro computer and bringing it to life in the browser.";
+  "In these two posts, I share how I modeled a retro computer and brought it to life in the browser.";
 const slugValue = (current: string) => ({ current, _type: "slug" as const });
 const seriesRef = { _id: slug, title, slug: slugValue(slug) };
 

@@ -26,8 +26,10 @@
   color-scheme: dark;
 }
 html {
-  scroll-behavior: smooth;
   scroll-padding-top: 92px;
+}
+@media (prefers-reduced-motion: no-preference) {
+  html:focus-within { scroll-behavior: smooth; }
 }
 body {
   background: var(--paper);
@@ -428,7 +430,7 @@ a {
   font: 1.25rem var(--mono);
   color: var(--accent-ink);
 }
-.about-detail details[open] summary::after {
+.about-detail details[open] > summary::after {
   content: "−";
 }
 .detail-row {
