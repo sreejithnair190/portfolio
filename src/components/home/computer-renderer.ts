@@ -35,15 +35,10 @@ function batchPart(
   return group;
 }
 
-export function mountComputer(canvas: HTMLCanvasElement) {
-  const renderer = new THREE.WebGLRenderer({
-    canvas,
-    alpha: true,
-    antialias: true,
-    powerPreference: "high-performance",
-  });
+export function mountComputer(canvas: HTMLCanvasElement, context: WebGL2RenderingContext) {
+  const renderer = new THREE.WebGLRenderer({ canvas, context });
   renderer.setPixelRatio(
-    Math.min(window.devicePixelRatio, canvas.clientWidth < 640 ? 1.5 : 1.75),
+    Math.min(window.devicePixelRatio, canvas.clientWidth < 640 ? 1.25 : 1.5),
   );
   renderer.setClearColor(0x000000, 0);
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
@@ -71,9 +66,9 @@ export function mountComputer(canvas: HTMLCanvasElement) {
   const { disk, escapeKey, screw } = studioAccessories();
   root.add(disk, escapeKey, screw);
   scene.add(new THREE.HemisphereLight(0xe2dfff, 0x52405c, 0.64));
-  const key = new THREE.DirectionalLight(0xffeee3, 2.05);
+  const key = new THREE.DirectionalLight(0xffe4d1, 2.05);
   key.position.set(-3, 6, 6);
-  const rim = new THREE.DirectionalLight(0xb5a5ff, 2.05);
+  const rim = new THREE.DirectionalLight(0xc4a9ff, 2.35);
   rim.position.set(4, 4, -4);
   const bounce = new THREE.DirectionalLight(0x9acbd2, 0.85);
   bounce.position.set(5, -1, 3);

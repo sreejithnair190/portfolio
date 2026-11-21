@@ -1,4 +1,6 @@
 export const siteUrl = "https://www.sreejithnair.me";
+export const portfolioDescription =
+  "I’m Sreejith, a full stack software engineer in Mumbai. I’ve spent over four years building web apps and REST APIs for hotel bookings, ticketing, and online orders.";
 export const github_url = "https://github.com/sreejithnair190";
 export const email = "sreejith190nair@gmail.com"
 export const linkedIn_url = "https://www.linkedin.com/in/sreejith-nair-a60915207/";

@@ -19,20 +19,34 @@ export default function SmoothScrollProvider({
       home.querySelectorAll<HTMLElement>(".project-slide"),
     );
     const heading = home.querySelector<HTMLElement>(".work-heading")!;
+    const picker = Array.from(home.querySelectorAll<HTMLAnchorElement>(".project-picker a"));
+    const work = heading.closest<HTMLElement>(".work-section")!;
+    const deck = work.querySelector<HTMLElement>(".project-deck")!;
+    const tones = slides.map((slide) => getComputedStyle(slide).getPropertyValue("--case-bg"));
+    const surfaces = home.querySelectorAll<HTMLElement>("[data-surface]");
     const entrances = Array.from(
       home.querySelectorAll<HTMLElement>("[data-enter]"),
     );
     let lenis: Lenis | null = null,
       reveal: IntersectionObserver | null = null,
       frame = 0;
+    let galleryVisible = false;
+    let selected = -1;
     function paint() {
       frame = 0;
-      if (reduced.matches) return;
       const h = window.innerHeight;
+      const bounds = slides.map((card) => card.getBoundingClientRect());
+      const current = Math.max(0, bounds.filter(({ top }) => top <= h * 0.5).length - 1);
+      if (current !== selected) {
+        picker[selected]?.removeAttribute("aria-current");
+        picker[current].setAttribute("aria-current", "location");
+        work.style.setProperty("--gallery-tone", tones[current]);
+        selected = current;
+      }
+      if (reduced.matches) return;
       const titleTop = heading.getBoundingClientRect().top;
       const entry = clamp((h - titleTop) / h);
       heading.style.setProperty("--title-offset", ((1 - entry) * 36).toFixed(2) + "px");
-      const bounds = slides.map((card) => card.getBoundingClientRect());
       // Each arriving card turns the layers beneath it around the same corner.
       let depth = 0;
       for (let i = slides.length - 1; i >= 0; i--) {
@@ -49,7 +63,40 @@ export default function SmoothScrollProvider({
       }
     }
     function schedule() {
-      if (!frame && !reduced.matches) frame = requestAnimationFrame(paint);
+      if (!frame && galleryVisible) frame = requestAnimationFrame(paint);
+    }
+    function revealFocusedProject(event: FocusEvent) {
+      const link = event.target;
+      if (!(link instanceof HTMLAnchorElement) || !link.matches(":focus-visible")) return;
+      const rect = link.getBoundingClientRect();
+      const hit = document.elementFromPoint(rect.x + rect.width / 2, rect.y + rect.height / 2);
+      if (link.contains(hit)) return;
+      // A pinned card can be inside the viewport but covered by another card.
+      const stop = link.closest(".project-slide")?.previousElementSibling;
+      if (stop instanceof HTMLElement) {
+        if (lenis) lenis.scrollTo(stop, { immediate: true });
+        else stop.scrollIntoView({ block: "start", behavior: "instant" });
+      }
+    }
+    function followPointer(event: PointerEvent) {
+      if (event.pointerType !== "mouse") return;
+      const surface = event.currentTarget as HTMLElement;
+      const rect = surface.getBoundingClientRect();
+      const x = clamp((event.clientX - rect.left) / rect.width);
+      const y = clamp((event.clientY - rect.top) / rect.height);
+      surface.style.setProperty("--surface-x", (2 * x - 1).toFixed(3));
+      surface.style.setProperty("--surface-y", (2 * y - 1).toFixed(3));
+    }
+    function centerSurface(this: HTMLElement) {
+      this.style.removeProperty("--surface-x");
+      this.style.removeProperty("--surface-y");
+    }
+    function releaseSurfaces() {
+      surfaces.forEach((surface) => {
+        surface.removeEventListener("pointermove", followPointer);
+        surface.removeEventListener("pointerleave", centerSurface);
+        centerSurface.call(surface);
+      });
     }
     function configure() {
       lenis?.destroy();
@@ -58,9 +105,15 @@ export default function SmoothScrollProvider({
       reveal = null;
       cancelAnimationFrame(frame);
       frame = 0;
+      releaseSurfaces();
       home.dataset.motion = reduced.matches ? "off" : "on";
+      schedule();
       if (reduced.matches) return;
       if (desktop.matches) {
+        surfaces.forEach((surface) => {
+          surface.addEventListener("pointermove", followPointer, { passive: true });
+          surface.addEventListener("pointerleave", centerSurface);
+        });
         lenis = new Lenis({
           autoRaf: true,
           smoothWheel: true,
@@ -90,6 +143,11 @@ export default function SmoothScrollProvider({
       schedule();
     }
     const shell = heading.closest<HTMLElement>(".shell")!;
+    const gallery = new IntersectionObserver(([entry]) => {
+      galleryVisible = entry.isIntersecting;
+      schedule();
+    }, { rootMargin: "100px 0px" });
+    gallery.observe(shell);
     function measureStack() {
       shell.style.setProperty("--work-heading-height", heading.offsetHeight + "px");
       const tallestCard = Math.max(...slides.map((slide) => slide.offsetHeight));
@@ -101,11 +159,15 @@ export default function SmoothScrollProvider({
     slides.forEach((slide) => resize.observe(slide));
     measureStack();
     configure();
+    deck.addEventListener("focusin", revealFocusedProject);
     reduced.addEventListener("change", configure);
     desktop.addEventListener("change", configure);
     window.addEventListener("scroll", schedule, { passive: true });
     window.addEventListener("resize", schedule);
     return () => {
+      deck.removeEventListener("focusin", revealFocusedProject);
+      releaseSurfaces();
+      gallery.disconnect();
       resize.disconnect();
       lenis?.destroy();
       reveal?.disconnect();

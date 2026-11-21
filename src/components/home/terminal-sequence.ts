@@ -43,14 +43,14 @@ export function bindTerminalSequence(
   }
 
   function measure() {
-    enabled = !preference.matches && roomy.matches;
+    const layout = getComputedStyle(stage);
+    enabled = layout.position === "sticky";
     if (!enabled) {
       targetX = targetY = x = y = 0;
       stage.style.removeProperty("--look-x");
       stage.style.removeProperty("--look-y");
     }
-    hero.dataset.sequence = enabled ? "on" : "off";
-    const inset = parseFloat(getComputedStyle(stage).top) || 0;
+    const inset = parseFloat(layout.top) || 0;
     start = hero.getBoundingClientRect().top + scrollY - inset;
     travel = Math.max(1, hero.offsetHeight - stage.offsetHeight);
     updateProgress();
@@ -86,6 +86,7 @@ export function bindTerminalSequence(
     }
     if (progress !== painted) {
       const entry = smooth(0.43, 0.82, progress);
+      stage.toggleAttribute("data-spread", entry > 0);
       stage.style.setProperty("--story-entry", entry.toFixed(4));
       stage.style.setProperty("--travel", progress.toFixed(4));
       painted = progress;

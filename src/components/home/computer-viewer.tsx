@@ -11,31 +11,57 @@ export default function ComputerViewer() {
 
   useEffect(() => {
     let active = true;
+    let nearby = false;
+    let loading = false;
     const element = canvas.current!;
+    const reduced = matchMedia("(prefers-reduced-motion: reduce)");
     const sequence = bindTerminalSequence(element, () => controller.current);
-    function onLoss(event: Event) {
-      event.preventDefault();
+    function showPoster() {
       setReady(false);
       controller.current?.dispose();
       controller.current = null;
     }
+    function onLoss(event: Event) {
+      event.preventDefault();
+      showPoster();
+    }
     async function initialize() {
+      if (!nearby || reduced.matches || loading || controller.current) return;
+      loading = true;
       try {
+        const context = element.getContext("webgl2", {
+          alpha: true,
+          antialias: true,
+          powerPreference: "high-performance",
+        });
+        if (!context || context.isContextLost()) return;
         const { mountComputer } = await import("./computer-renderer");
-        if (!active) return;
-        controller.current?.dispose();
-        controller.current = mountComputer(element);
+        if (!active || !nearby || reduced.matches || context.isContextLost()) return;
+        controller.current = mountComputer(element, context);
         setReady(true);
         sequence.refresh();
       } catch {
         if (active) setReady(false);
+      } finally {
+        loading = false;
       }
     }
+    function changeMotion() {
+      if (reduced.matches) showPoster();
+      else initialize();
+    }
+    const observer = new IntersectionObserver(([entry]) => {
+      nearby = entry.isIntersecting;
+      if (nearby) initialize();
+    });
+    observer.observe(element);
+    reduced.addEventListener("change", changeMotion);
     element.addEventListener("webglcontextlost", onLoss);
     element.addEventListener("webglcontextrestored", initialize);
-    initialize();
     return () => {
       active = false;
+      observer.disconnect();
+      reduced.removeEventListener("change", changeMotion);
       sequence.dispose();
       element.removeEventListener("webglcontextlost", onLoss);
       element.removeEventListener("webglcontextrestored", initialize);

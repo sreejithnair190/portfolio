@@ -200,10 +200,18 @@ export function createComputer() {
   const uv = screenGeometry.getAttribute("uv");
   for (let i = 0; i < points.count; i++)
     uv.setXY(i, points.getX(i) / 2.14 + 0.5, points.getY(i) / 1.46 + 0.5);
-  const glass = new THREE.Mesh(
-    screenGeometry,
-    new THREE.MeshBasicMaterial({ map: crtTexture() }),
-  );
+  const phosphor = crtTexture();
+  const glass = new THREE.Mesh(screenGeometry, new THREE.MeshPhysicalMaterial({
+    color: 0x161d1a,
+    map: phosphor,
+    emissive: 0xffffff,
+    emissiveMap: phosphor,
+    emissiveIntensity: 0.92,
+    roughness: 0.36,
+    clearcoat: 0.55,
+    clearcoatRoughness: 0.23,
+    envMapIntensity: 0.15,
+  }));
   glass.position.set(0, 1.97, 1.218);
   monitor.add(glass);
   // Inset grille slots on both sides and a row across the lid.

@@ -27,6 +27,7 @@ export default function ContactForm() {
     <form
       noValidate
       className="contact-form"
+      data-enter
       onSubmit={handleSubmit(submitEnquiry)}
     >
       <div className="field-row">

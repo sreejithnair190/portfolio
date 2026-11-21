@@ -8,7 +8,7 @@ import Footer from "@/components/footer";
 import { root_keywords } from "@/utils/keywords";
 import { EXPERIENCE } from "@/utils/experience";
 
-import { siteUrl } from "@/utils/constants";
+import { portfolioDescription, siteUrl } from "@/utils/constants";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -16,8 +16,7 @@ export const metadata: Metadata = {
     default: `Sreejith Nair | ${EXPERIENCE[0].title}`,
     template: "%s | Sreejith Nair",
   },
-  description:
-    "Explore Sreejith Nair’s work on hotel bookings, event ticketing, and commerce APIs as a senior software engineer in Mumbai.",
+  description: portfolioDescription,
   keywords: root_keywords,
   authors: [{ name: "Sreejith Nair" }],
   openGraph: {
@@ -44,7 +43,7 @@ export default function RootLayout({
           <Navbar />
           <main id="main">{children}</main>
           <Footer />
-          <SpeedInsights />
+          {(process.env.VERCEL === "1" || process.env.NEXT_PUBLIC_VERCEL_OBSERVABILITY_BASEPATH) && <SpeedInsights />}
         </ThemeProvider>
       </body>
     </html>
